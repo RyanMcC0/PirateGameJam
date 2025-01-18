@@ -9,8 +9,6 @@ radius = 67.0
 [node name="RigidBody2D" type="RigidBody2D"]
 position = Vector2(214, 137)
 script = ExtResource("1_tyrmk")
-metadata/_edit_horizontal_guides_ = [114.0, 137.0]
-metadata/_edit_vertical_guides_ = [273.0, 214.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_p3416")
