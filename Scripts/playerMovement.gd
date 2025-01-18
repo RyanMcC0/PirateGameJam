@@ -39,7 +39,7 @@ func shoot_bullet() -> void:
 	var bullet_direction = transform.x.normalized()
 	bullet_instance.position = global_position+(bullet_direction*bullet_offset)
 	get_parent().add_child(bullet_instance)
-	print(bullet_instance.linear_velocity)
+
 	bullet_instance.linear_velocity = bullet_speed * bullet_direction
 
 func add_force() -> void:

@@ -5,7 +5,7 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
+
 [node name="RigidBody2D" parent="." instance=ExtResource("2_q4g8i")]
 position = Vector2(965, 541)
-
-[node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
