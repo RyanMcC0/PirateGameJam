@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmq2wblu6rm0c"]
+
+[ext_resource type="Script" path="res://Scenes/options_menu.gd" id="1_6xeqs"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6xeqs")
+
+[node name="OptionsContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -25.0
+offset_right = 99.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ShootOption" type="Label" parent="OptionsContainer/HBoxContainer"]
+layout_mode = 2
+text = "Shoot:
+"
+
+[node name="ShootOptionButton" type="Label" parent="OptionsContainer/HBoxContainer"]
+layout_mode = 2
+text = "Left Mouse Button
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AimOption" type="Label" parent="OptionsContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Aim:   
+"
+
+[node name="AimOptionButton" type="Label" parent="OptionsContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Follows Mouse
+"
+
+[node name="BackButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0015625
+anchor_top = 0.000925926
+anchor_right = 0.040625
+anchor_bottom = 0.0296296
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 12.0
+offset_bottom = 14.0
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="BackButtonContainer"]
+layout_mode = 2
+text = "< Back"
+
+[connection signal="pressed" from="BackButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
