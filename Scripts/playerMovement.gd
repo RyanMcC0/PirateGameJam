@@ -14,11 +14,17 @@ var bullet_offset = Vector2(80,-30)
 # Load the bullet scene
 var Bullet = preload("res://Scenes/Bullet.tscn")
 
+func _ready() -> void:
+	# Play the idle animation
+	$AnimatedSprite2D.play("Idle")
+
 func _physics_process(delta: float) -> void:
 	if follow_delay_timer > 0:
 		follow_delay_timer = clamp(follow_delay_timer - delta, 0, follow_delay)
 		if follow_delay_timer == 0:
 			can_follow_cursor = true
+			$AnimatedSprite2D.play("Idle")
+	
 
 	if can_follow_cursor:
 		var mouse_position = get_global_mouse_position()
@@ -42,6 +48,7 @@ func shoot_bullet() -> void:
 	bullet_instance.position = bullet_global_position
 	get_parent().add_child(bullet_instance)
 	bullet_instance.linear_velocity = bullet_speed * bullet_direction
+	$AnimatedSprite2D.play("Shooting")
 
 func add_force() -> void:
 	var direction = -transform.x.normalized()  # Get the direction opposite to where the node is facing
@@ -66,3 +73,9 @@ func follow_cursor(delta: float) -> void:
 	if abs(rotation - target_angle) < 0.15:
 		rotation = target_angle
 		angular_velocity = Vector2(0,0)
+		
+func anim_shoot() -> void:
+	pass
+
+func anim_idle() -> void:
+	pass
