@@ -3,7 +3,7 @@ extends RigidBody2D
 const friction = 0.10
 var recoil_force_trans = 800
 var recoil_force_rot = -3000
-var rotation_speed = 20000
+var rotation_speed = 25000
 var target
 var can_follow_cursor = true
 var follow_delay = 0.3  # Adjust the delay as needed
@@ -64,6 +64,6 @@ func follow_cursor(delta: float) -> void:
 	var angular_velocity = angle_difference * rotation_speed
 	angular_velocity = clamp(angular_velocity, -rotation_speed, rotation_speed)
 	apply_torque_impulse(angular_velocity * delta)
-	if abs(rotation - target_angle) < 0.1:
+	if abs(rotation - target_angle) < 0.15:
 		rotation = target_angle
 		angular_velocity = Vector2(0,0)
