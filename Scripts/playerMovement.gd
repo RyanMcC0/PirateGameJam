@@ -9,7 +9,7 @@ var can_follow_cursor = true
 var follow_delay = 0.3  # Adjust the delay as needed
 var follow_delay_timer = 0.0
 var bullet_speed = 1000
-var bullet_offset = Vector2(50,50)
+var bullet_offset = Vector2(80,-30)
 
 # Load the bullet scene
 var Bullet = preload("res://Scenes/Bullet.tscn")
@@ -37,9 +37,11 @@ func shoot_bullet() -> void:
 	var bullet_instance = Bullet.instantiate()
 	bullet_instance.rotation = rotation+(PI/2)
 	var bullet_direction = transform.x.normalized()
-	bullet_instance.position = global_position+(bullet_direction*bullet_offset)
+	# Calculate the global position for the bullet using the offset
+	var bullet_global_position = global_position + (transform.basis_xform(bullet_offset))
+	bullet_instance.position = bullet_global_position
+	
 	get_parent().add_child(bullet_instance)
-
 	bullet_instance.linear_velocity = bullet_speed * bullet_direction
 
 func add_force() -> void:
