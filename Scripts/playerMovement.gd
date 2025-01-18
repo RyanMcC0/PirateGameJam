@@ -1,14 +1,18 @@
 extends RigidBody2D
 
-const friction = 0.15
-var recoil_force_trans = 600
-var recoil_force_rot = -5000
-var rotation_speed = 15000
+const friction = 0.10
+var recoil_force_trans = 800
+var recoil_force_rot = -3000
+var rotation_speed = 20000
 var target
 var can_follow_cursor = true
 var follow_delay = 0.3  # Adjust the delay as needed
 var follow_delay_timer = 0.0
+var bullet_speed = 1000
+var bullet_offset = Vector2(50,50)
 
+# Load the bullet scene
+var Bullet = preload("res://Scenes/Bullet.tscn")
 
 func _physics_process(delta: float) -> void:
 	if follow_delay_timer > 0:
@@ -26,7 +30,17 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
+			shoot_bullet()
 			add_force()
+
+func shoot_bullet() -> void:
+	var bullet_instance = Bullet.instantiate()
+	bullet_instance.rotation = rotation+(PI/2)
+	var bullet_direction = transform.x.normalized()
+	bullet_instance.position = global_position+(bullet_direction*bullet_offset)
+	get_parent().add_child(bullet_instance)
+	print(bullet_instance.linear_velocity)
+	bullet_instance.linear_velocity = bullet_speed * bullet_direction
 
 func add_force() -> void:
 	var direction = -transform.x.normalized()  # Get the direction opposite to where the node is facing
