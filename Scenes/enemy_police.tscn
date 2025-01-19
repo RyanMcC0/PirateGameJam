@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf3wgpr4wd7jt"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_police.gd" id="1_3k3rl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrmr3"]
+size = Vector2(64, 62)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p1b7s"]
+
+[node name="EnemyPolice" type="RigidBody2D"]
+position = Vector2(247, 116)
+max_contacts_reported = 100
+script = ExtResource("1_3k3rl")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_hrmr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(1.03125, 1)
+texture = SubResource("GradientTexture2D_p1b7s")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
