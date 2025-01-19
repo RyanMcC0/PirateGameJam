@@ -88,7 +88,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D"]
 position = Vector2(214, 137)
 script = ExtResource("1_tyrmk")
 
