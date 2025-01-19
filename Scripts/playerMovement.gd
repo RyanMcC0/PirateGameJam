@@ -12,7 +12,7 @@ var bullet_speed = 1500
 var bullet_offset = Vector2(88, -25)
 var maxAmmo = 4 
 var ammoCount = maxAmmo
-var reloadTime = 1.0
+var reloadTime = 1.75
 var is_reloading = false
 var reload_timer = 0.0
 

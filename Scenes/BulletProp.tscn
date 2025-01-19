@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgmyn1yk5ls7m"]
+[gd_scene load_steps=3 format=3 uid="uid://bgmyn1yk5ls7m"]
 
-[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_esfif"]
 [ext_resource type="Texture2D" uid="uid://k670sv8wcn3s" path="res://Assets/bullet.svg" id="2_koq7n"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qg6ay"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_675ci"]
+radius = 6.933
+height = 40.0573
 
 [node name="BulletProp" type="RigidBody2D"]
 rotation = -1.5708
@@ -12,14 +12,13 @@ scale = Vector2(1.29814, 1.29814)
 collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
-constant_force = Vector2(0, 9.8)
-script = ExtResource("1_esfif")
+constant_force = Vector2(0, 500)
 
-[node name="Bullet" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-07, 10)
-scale = Vector2(0.0849609, 0.0917192)
+[node name="BulletUI" type="Sprite2D" parent="."]
+position = Vector2(-1.13687e-13, 9.53674e-07)
+scale = Vector2(0.117945, 0.127328)
 texture = ExtResource("2_koq7n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-shape = SubResource("CapsuleShape2D_qg6ay")
+position = Vector2(2.7886e-06, -0.770333)
+shape = SubResource("CapsuleShape2D_675ci")
