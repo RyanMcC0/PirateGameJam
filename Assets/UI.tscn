@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3np345uj17bp"]
+
+[ext_resource type="Script" path="res://Assets/UI.gd" id="1_4ffvu"]
+[ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eua4s"]
+size = Vector2(1920, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwpdf"]
+atlas = ExtResource("2_ldcvm")
+
+[node name="Ui" type="Node2D"]
+script = ExtResource("1_4ffvu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("PlaceholderTexture2D_eua4s")
+
+[node name="AmmoCounter" type="Node2D" parent="."]
+position = Vector2(706, 103)
+scale = Vector2(0.941996, 0.941996)
+
+[node name="Mag" type="Sprite2D" parent="."]
+position = Vector2(598, 101)
+scale = Vector2(0.669006, 0.669006)
+texture = SubResource("AtlasTexture_cwpdf")
+hframes = 10
