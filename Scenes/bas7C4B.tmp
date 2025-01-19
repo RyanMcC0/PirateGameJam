@@ -8,9 +8,10 @@
 
 [node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
 
-[node name="Player" parent="." instance=ExtResource("2_q4g8i")]
-position = Vector2(139, 598)
+[node name="RigidBody2D" parent="." instance=ExtResource("2_q4g8i")]
+position = Vector2(138, 598)
 
 [node name="Ui" parent="." instance=ExtResource("3_m4gfi")]
+position = Vector2(-1, 0)
 
-[connection signal="ammo_count_changed" from="Player" to="Ui" method="_on_rigid_body_2d_ammo_count_changed"]
+[connection signal="ammo_count_changed" from="RigidBody2D" to="Ui" method="_on_rigid_body_2d_ammo_count_changed"]

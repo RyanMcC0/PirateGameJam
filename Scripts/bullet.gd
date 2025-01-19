@@ -3,6 +3,4 @@ var time_in_seconds = 1
 var friction = 0.90
 
 func _physics_process(delta: float) -> void:
-	linear_velocity = linear_velocity * pow(friction, delta)
-	if linear_velocity.length() < 100:
-		queue_free()
+	pass

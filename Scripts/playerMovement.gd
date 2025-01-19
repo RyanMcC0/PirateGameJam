@@ -10,18 +10,22 @@ var follow_delay = 0.3  # Adjust the delay as needed
 var follow_delay_timer = 0.0
 var bullet_speed = 1500
 var bullet_offset = Vector2(88, -25)
-var maxAmmo = 4
+var maxAmmo = 4 
 var ammoCount = maxAmmo
 var reloadTime = 1.0
 var is_reloading = false
 var reload_timer = 0.0
 
+
+signal ammo_count_changed(new_ammo_count)
+
 # Load the bullet scene
-var Bullet = preload("res://Scenes/Bullet.tscn")
+var Bullet = preload("res://Scenes/BulletProj.tscn")
 
 func _ready() -> void:
 	# Play the idle animation
 	$AnimatedSprite2D.play("Idle")
+	emit_signal("ammo_count_changed", ammoCount)
 
 func _physics_process(delta: float) -> void:
 	if follow_delay_timer > 0:
@@ -35,6 +39,7 @@ func _physics_process(delta: float) -> void:
 		if reload_timer == 0:
 			is_reloading = false
 			ammoCount = maxAmmo
+			emit_signal("ammo_count_changed", ammoCount)
 			$AnimatedSprite2D.play("Idle")
 
 	if can_follow_cursor:
@@ -62,14 +67,14 @@ func shoot_bullet() -> void:
 		bullet_instance.linear_velocity = bullet_speed * bullet_direction
 		$AnimatedSprite2D.play("Shooting")
 		ammoCount -= 1
-
+		emit_signal("ammo_count_changed", ammoCount) #For UI
 		if ammoCount == 0:
 			start_reload()
 
 func start_reload() -> void:
 	is_reloading = true
 	reload_timer = reloadTime
-	$AnimatedSprite2D.play("Reloading")
+	#$AnimatedSprite2D.play("Reloading")
 
 func add_force() -> void:
 	var direction = -transform.x.normalized()  # Get the direction opposite to where the node is facing
@@ -94,3 +99,6 @@ func follow_cursor(delta: float) -> void:
 	if abs(rotation - target_angle) < 0.15:
 		rotation = target_angle
 		angular_velocity = Vector2(0,0)
+
+func broadcast_signals() -> void:
+	pass

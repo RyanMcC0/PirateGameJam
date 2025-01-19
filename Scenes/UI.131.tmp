@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3np345uj17bp"]
 
-[ext_resource type="Script" path="res://Assets/UI.gd" id="1_4ffvu"]
+[ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
 [ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eua4s"]

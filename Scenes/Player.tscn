@@ -96,7 +96,7 @@ script = ExtResource("1_tyrmk")
 shape = SubResource("CircleShape2D_p3416")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-6, -4)
+position = Vector2(-2, -4)
 scale = Vector2(0.299988, 0.299988)
 sprite_frames = SubResource("SpriteFrames_1whxk")
 animation = &"Idle"
