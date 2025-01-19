@@ -5,7 +5,7 @@ var friction = 0.90
 func _ready() -> void:
 	continuous_cd = RigidBody2D.CCDMode.CCD_MODE_CAST_RAY
 	contact_monitor = true
-	max_contacts_reported = 5 #may need to change value
+	max_contacts_reported = 5 # may need to change value
 	connect("body_entered", _on_body_entered)
 
 func _physics_process(delta: float) -> void:
@@ -20,4 +20,3 @@ func _on_body_entered(collided: Node2D) -> void:
 		queue_free()
 	elif collided is TileMapLayer:
 		queue_free()
-	

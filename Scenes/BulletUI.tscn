@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh0202s8p0wxl"]
+
+[ext_resource type="Texture2D" uid="uid://k670sv8wcn3s" path="res://Assets/bullet.svg" id="2_x0jc5"]
+
+[node name="BulletUI" type="StaticBody2D"]
+
+[node name="BulletUI" type="Sprite2D" parent="."]
+position = Vector2(-1.13687e-13, 9.53674e-07)
+rotation = -1.5708
+scale = Vector2(0.117945, 0.127328)
+texture = ExtResource("2_x0jc5")

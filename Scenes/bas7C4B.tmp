@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8yqr6aut1u18"]
+
+[ext_resource type="PackedScene" uid="uid://q82o1q7v1wn4" path="res://Scenes/Levels/testlvl.tscn" id="2_o4y0h"]
+[ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
+[ext_resource type="PackedScene" uid="uid://d3np345uj17bp" path="res://Scenes/UI.tscn" id="3_m4gfi"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
+
+[node name="RigidBody2D" parent="." instance=ExtResource("2_q4g8i")]
+position = Vector2(138, 598)
+
+[node name="Ui" parent="." instance=ExtResource("3_m4gfi")]
+position = Vector2(-1, 0)
+
+[connection signal="ammo_count_changed" from="RigidBody2D" to="Ui" method="_on_rigid_body_2d_ammo_count_changed"]
