@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf3wgpr4wd7jt"]
+[gd_scene load_steps=4 format=3 uid="uid://bf3wgpr4wd7jt"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_police.gd" id="1_3k3rl"]
-[ext_resource type="Texture2D" uid="uid://be7ua5ae2ialy" path="res://Assets/Aseprite/PoliceBody.svg" id="2_xf1jt"]
-[ext_resource type="Texture2D" uid="uid://bkkf5u5fuh1jp" path="res://Assets/Aseprite/PoliceBody_ArmF.svg" id="3_hnynu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrmr3"]
 size = Vector2(64, 62)
@@ -27,13 +25,3 @@ texture = SubResource("GradientTexture2D_p1b7s")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="PoliceBody" type="Sprite2D" parent="."]
-position = Vector2(175, 67)
-texture = ExtResource("2_xf1jt")
-
-[node name="PoliceBodyArmF" type="Sprite2D" parent="."]
-position = Vector2(141, 65)
-rotation = 0.0113298
-texture = ExtResource("3_hnynu")
-offset = Vector2(35, 1)
