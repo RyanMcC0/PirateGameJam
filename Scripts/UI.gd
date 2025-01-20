@@ -2,7 +2,7 @@ extends Node2D
 
 var ammo_count = 0
 var maxAmmo
-var bulletPositions = [Vector2(624,33),Vector2(626,47),Vector2(629,61),Vector2(631,74),Vector2(633,90),Vector2(636,105),Vector2(639,119),Vector2(641,139),Vector2(644,150)]
+var bulletPositions = [Vector2(624,33),Vector2(626,47),Vector2(629,61),Vector2(631,74),Vector2(633,90),Vector2(636,105),Vector2(639,119),Vector2(641,135),Vector2(644,150)]
 var ejectPosition = Vector2(619,13)
 var magBulletQueue: Array
 var ejectBulletQueue: Array

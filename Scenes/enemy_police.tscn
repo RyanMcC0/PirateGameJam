@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bf3wgpr4wd7jt"]
 
-[ext_resource type="Script" path="res://Scenes/enemy_police.gd" id="1_3k3rl"]
+[ext_resource type="Script" path="res://Scripts/enemy_police.gd" id="1_3k3rl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrmr3"]
 size = Vector2(64, 62)
