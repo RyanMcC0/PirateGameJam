@@ -3,7 +3,7 @@ extends EnemyBase
 #Node references
 var player: Node2D
 var ray_caster: RayCast2D
-var Bullet = preload("res://Scenes/Bullet.tscn")
+var Bullet = preload("res://Scenes/BulletProj.tscn")
 
 #Global variables
 var shooting_distance = 400
