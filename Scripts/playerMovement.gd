@@ -130,6 +130,6 @@ func heal(amount: int) -> void:
 
 
 func die() -> void:
-	pass
+	get_tree().change_scene_to_file("res://Scenes/GameOver.tscn") #change scene to death scene upon player death
 
 signal health_changed(new_health)
