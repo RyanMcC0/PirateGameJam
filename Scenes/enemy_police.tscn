@@ -1,7 +1,7 @@
 [gd_scene load_steps=35 format=3 uid="uid://bf3wgpr4wd7jt"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_police.gd" id="1_3k3rl"]
-[ext_resource type="Texture2D" uid="uid://dylydm0gm8jkp" path="res://Assets/Aseprite/Cop_enemy_shoot_ew-Sheet.svg" id="2_nrclf"]
+[ext_resource type="Texture2D" uid="uid://dylydm0gm8jkp" path="res://Assets/Aseprite/Cop_enemy_shoot_ew-sheet.svg" id="2_nrclf"]
 [ext_resource type="Texture2D" uid="uid://dub7ssbwy05ma" path="res://Assets/Aseprite/Cop_enemy_shoot_south-Sheet.svg" id="3_k0hrm"]
 [ext_resource type="Texture2D" uid="uid://dxi4hc5pt30ni" path="res://Assets/Aseprite/Cop_enemy_shoot_north-Sheet.svg" id="4_apbpr"]
 
@@ -235,11 +235,10 @@ metadata/_edit_group_ = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-32, -60, -32, -13, -41, -11, -50, 4, -50, 35, -34, 45, -45, 88, 47, 89, 36, 45, 52, 34, 52, -5, 44, -13, 37, -13, 36, -57, 26, -79, -22, -79)
 
-[node name="Shooting Torso" type="AnimatedSprite2D" parent="."]
+[node name="TorsoSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_cdoh1")
-animation = &"ShootingNorth"
-frame_progress = 0.983907
+animation = &"ShootEast"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
