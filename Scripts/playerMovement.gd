@@ -15,7 +15,8 @@ var ammoCount = maxAmmo
 var reloadTime = 1.75
 var is_reloading = false
 var reload_timer = 0.0
-
+var max_health = 3 #max health of the player
+var current_health = 3 #current health of the player
 
 signal ammo_count_changed(new_ammo_count)
 
@@ -26,6 +27,7 @@ func _ready() -> void:
 	# Play the idle animation
 	$AnimatedSprite2D.play("Idle")
 	emit_signal("ammo_count_changed", ammoCount)
+	current_health = max_health
 
 func _physics_process(delta: float) -> void:
 	if follow_delay_timer > 0:
@@ -54,6 +56,13 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and ammoCount > 0 and not is_reloading:
 			shoot_bullet()
 			add_force()
+	#handle damage action (press P key)
+	if Input.is_action_just_pressed("damage"):
+		take_damage(1)
+	#handle heal action (press H key)
+	if Input.is_action_just_pressed("heal"):
+		heal(1)
+	
 
 func shoot_bullet() -> void:
 	if ammoCount > 0:
@@ -102,3 +111,25 @@ func follow_cursor(delta: float) -> void:
 
 func broadcast_signals() -> void:
 	pass
+
+
+func take_damage(amount: int) -> void:
+	current_health -= amount
+	if current_health < 0:
+		current_health = 0 # Prevent health going below zero
+	emit_signal("health_changed", current_health) #emit new health value
+	if current_health == 0:
+		die() #death function
+
+
+func heal(amount: int) -> void:
+	current_health += amount
+	if current_health > max_health:
+		current_health = max_health
+	emit_signal("health_changed", current_health) #emit new health value
+
+
+func die() -> void:
+	pass
+
+signal health_changed(new_health)

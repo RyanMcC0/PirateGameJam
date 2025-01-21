@@ -17,4 +17,8 @@ func _on_body_entered(collided: Node2D) -> void:
 		collided._on_bullet_hit()
 		queue_free()
 	elif collided is TileMapLayer:
+		queue_free()#
+	elif collided.name == "player":
+		if collided.has_method("take_damage"):
+			collided.take_damage(1)
 		queue_free()
