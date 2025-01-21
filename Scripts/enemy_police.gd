@@ -81,3 +81,6 @@ func is_line_of_sight() -> bool:
 	else:
 		print("player not found")
 		return false
+#Returns value relating to characters facing direction # N-0 E-1 S-2 W-3 (Increases CW from north)
+func get_facing() -> int:
+	return 0

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3np345uj17bp"]
+[gd_scene load_steps=8 format=3 uid="uid://d3np345uj17bp"]
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
 [ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
+[ext_resource type="Script" path="res://Scripts/health_ui.gd" id="3_t6grl"]
+[ext_resource type="Texture2D" uid="uid://dx6kdj0ph28vo" path="res://Assets/Heart Sprite.png" id="4_bq1nb"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eua4s"]
 size = Vector2(1920, 192)
@@ -37,3 +39,24 @@ collision_mask = 2
 [node name="BulletCollider" type="CollisionShape2D" parent="BulletCollider"]
 position = Vector2(960, 202)
 shape = SubResource("RectangleShape2D_yn503")
+
+[node name="HealthUI" type="CanvasLayer" parent="."]
+script = ExtResource("3_t6grl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HealthUI"]
+offset_left = 240.0
+offset_top = 50.0
+offset_right = 448.0
+offset_bottom = 242.0
+scale = Vector2(0.5, 0.5)
+
+[node name="TextureRect" type="TextureRect" parent="HealthUI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_bq1nb")
+
+[node name="Label" type="Label" parent="HealthUI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 17
+theme_override_font_sizes/font_size = 90
+text = "x3"

@@ -1,7 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8yqr6aut1u18"]
+[gd_scene load_steps=6 format=3 uid="uid://c8yqr6aut1u18"]
 
-[ext_resource type="Script" path="res://Scripts/health_ui.gd" id="1_7gea8"]
-[ext_resource type="Texture2D" uid="uid://dx6kdj0ph28vo" path="res://Assets/Heart Sprite.png" id="1_yo4f4"]
 [ext_resource type="PackedScene" uid="uid://q82o1q7v1wn4" path="res://Scenes/Levels/testlvl.tscn" id="2_o4y0h"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
 [ext_resource type="PackedScene" uid="uid://d3np345uj17bp" path="res://Scenes/UI.tscn" id="3_m4gfi"]
@@ -9,27 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://c0562xedba2p3" path="res://Scenes/pause_menu.tscn" id="4_8prwd"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="HealthUI" type="CanvasLayer" parent="."]
-script = ExtResource("1_7gea8")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HealthUI"]
-offset_left = 240.0
-offset_top = 50.0
-offset_right = 448.0
-offset_bottom = 242.0
-scale = Vector2(0.5, 0.5)
-
-[node name="TextureRect" type="TextureRect" parent="HealthUI/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("1_yo4f4")
-
-[node name="Label" type="Label" parent="HealthUI/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 9
-theme_override_constants/shadow_outline_size = 17
-theme_override_font_sizes/font_size = 90
-text = "x3"
 
 [node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
 
