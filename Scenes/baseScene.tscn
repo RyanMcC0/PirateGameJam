@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3np345uj17bp" path="res://Scenes/UI.tscn" id="3_m4gfi"]
 [ext_resource type="PackedScene" uid="uid://bf3wgpr4wd7jt" path="res://Scenes/enemy_police.tscn" id="4_8eam8"]
 [ext_resource type="PackedScene" uid="uid://c0562xedba2p3" path="res://Scenes/pause_menu.tscn" id="4_8prwd"]
+[ext_resource type="PackedScene" uid="uid://bilnor56d725d" path="res://Scenes/PoliceSpawner.tscn" id="6_3fi62"]
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
 
