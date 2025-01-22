@@ -20,6 +20,7 @@ func _ready() -> void:
 	player = get_parent().get_node("Player")
 	ray_caster = $RayCast2D
 	ray_caster.enabled = true
+	lock_rotation = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
