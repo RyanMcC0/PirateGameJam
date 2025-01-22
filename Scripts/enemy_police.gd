@@ -58,8 +58,11 @@ func attack(direction) -> void:
 	
 	# Calculate the global position for the bullet using the offset
 	bullet_instance.position = global_position + (transform.basis_xform(bullet_offset))
-	get_parent().add_child(bullet_instance)
-	bullet_instance.linear_velocity = bullet_speed * direction
+	#get_parent().add_child(bullet_instance)
+	
+	switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
+	
+	#bullet_instance.linear_velocity = bullet_speed * direction
 	
 	shot_timer = 0.0
 
@@ -81,6 +84,28 @@ func is_line_of_sight() -> bool:
 	else:
 		print("player not found")
 		return false
+
 #Returns value relating to characters facing direction # N-0 E-1 S-2 W-3 (Increases CW from north)
-func get_facing() -> int:
-	return 0
+func convertToCardinal(velocity: Vector2) -> int:
+	if velocity == Vector2.ZERO:
+		return 2
+		
+	if abs(velocity.x) > abs(velocity.y):
+		#Horizontal movement
+		if velocity.x > 0:
+			return 1
+		else:
+			return 3
+	else:
+		#Vertical movement
+		if velocity.y > 0:
+			return 0
+		else:
+			return 2
+
+func switch_anim(facing: int) -> void:
+	match facing:
+		0: $TorsoSprite.play("ShootingNorth")
+		1: $TorsoSprite.play("ShootEast")
+		2: $TorsoSprite.play("ShootSouth")
+		3: $TorsoSprite.play("ShootWest")
