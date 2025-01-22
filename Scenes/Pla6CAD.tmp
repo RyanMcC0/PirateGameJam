@@ -100,4 +100,3 @@ position = Vector2(-2, -4)
 scale = Vector2(0.299988, 0.299988)
 sprite_frames = SubResource("SpriteFrames_1whxk")
 animation = &"Idle"
-frame_progress = 0.56742
