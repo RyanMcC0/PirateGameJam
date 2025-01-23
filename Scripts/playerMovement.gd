@@ -22,6 +22,9 @@ var current_health = 3 #current health of the player
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
 signal melee_attack()
+signal health_changed(new_health)
+
+@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 
 @onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 
@@ -133,7 +136,8 @@ func heal(amount: int) -> void:
 
 func die() -> void:
 	get_tree().change_scene_to_file("res://Scenes/GameOver.tscn") #change scene to death scene upon player death
-	
+
+
 func _on_body_entered(collided: Node2D) -> void:
 	if collided is EnemyBase:
 		if collided.has_method("_on_melee_hit"):
