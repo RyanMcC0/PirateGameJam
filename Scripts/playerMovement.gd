@@ -130,8 +130,6 @@ func die() -> void:
 	get_tree().change_scene_to_file("res://Scenes/GameOver.tscn") #change scene to death scene upon player death
 	
 func _on_body_entered(collided: Node2D) -> void:
-	print(collided)
 	if collided is EnemyBase:
-		print("hit enemy base")
 		if collided.has_method("_on_melee_hit"):
 			collided._on_melee_hit()

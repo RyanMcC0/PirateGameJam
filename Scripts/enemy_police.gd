@@ -9,10 +9,11 @@ var Bullet = preload("res://Scenes/BulletProj.tscn")
 var shooting_distance = 400
 var movement_speed = 100
 var safe_distance = 100
+var accel = 5
 var player_location
 var bullet_speed = 1500
 var bullet_offset = Vector2(80,-30)
-var impact_strength = 1000
+var impact_strength = 1500
 var shot_timer = 0.0
 var fire_rate = 1
 var moving = false
@@ -88,7 +89,6 @@ func move(delta) -> void:
 func attack(direction) -> void:
 	var bullet_instance = Bullet.instantiate()
 	bullet_instance.rotation = rotation+(PI/2)
-	
 	# Calculate the global position for the bullet using the offset
 	bullet_instance.position = global_position + (transform.basis_xform(bullet_offset))
 	#get_parent().add_child(bullet_instance)
@@ -97,10 +97,10 @@ func attack(direction) -> void:
 	shot_timer = 0.0
 
 func retreat(direction) -> void:
-	linear_velocity = -direction * movement_speed 
+	linear_velocity = linear_velocity.move_toward(-direction*movement_speed, accel)
 
 func pursue(direction) -> void:
-	linear_velocity = direction * movement_speed
+		linear_velocity = linear_velocity.move_toward(direction*movement_speed, accel)
 
 
 # emit ray from enemy to player along vector path
@@ -145,11 +145,10 @@ func play_anim_shoot() -> void:
 
 func _on_melee_hit() -> void:
 	var direction = (player_location - self.position).normalized()
-	apply_central_impulse(direction*impact_strength)
+	apply_central_impulse(-direction*impact_strength)
 	apply_red_tint()
 
 func apply_red_tint() -> void:
-	print("in red tint")
 	$Legs.material.set_shader_parameter("tint_amount", shaderTint)
 	$TorsoSprite.material.set_shader_parameter("tint_amount", shaderTint)
 	is_tinted = true
