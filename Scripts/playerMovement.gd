@@ -23,6 +23,8 @@ signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
 signal melee_attack()
 
+@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
+
 # Load the bullet scene
 var Bullet = preload("res://Scenes/BulletProj.tscn")
 
@@ -138,5 +140,5 @@ func _on_body_entered(collided: Node2D) -> void:
 			collided._on_melee_hit()
 		var coliDirection = (collided.position - self.position).normalized()
 		linear_velocity = -coliDirection * impact_strength
+		emit_signal("melee_attack")
 
-@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
