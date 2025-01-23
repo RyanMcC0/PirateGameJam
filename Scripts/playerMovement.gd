@@ -11,7 +11,7 @@ var follow_delay = 0.3  # Adjust the delay as needed
 var follow_delay_timer = 0.0
 var bullet_speed = 1500
 var bullet_offset = Vector2(88, -25)
-var maxAmmo = 8
+var maxAmmo = 4
 var ammoCount = maxAmmo
 var reloadTime = 1.75
 var is_reloading = false
@@ -65,7 +65,9 @@ func _input(event: InputEvent) -> void:
 	#handle heal action (press H key)
 	if Input.is_action_just_pressed("heal"):
 		heal(1)
-	
+	if Input.is_action_just_pressed("show_upgrade"):
+		upgrade_screen.show_upgrade_screen(self)
+
 
 func shoot_bullet() -> void:
 	if ammoCount > 0:
@@ -136,3 +138,5 @@ func _on_body_entered(collided: Node2D) -> void:
 			collided._on_melee_hit()
 		var coliDirection = (collided.position - self.position).normalized()
 		linear_velocity = -coliDirection * impact_strength
+
+@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
