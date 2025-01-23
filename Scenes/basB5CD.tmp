@@ -30,6 +30,5 @@ size_flags_vertical = 4
 position = Vector2(883, 525)
 
 [node name="UpgradeScreen" parent="." instance=ExtResource("6_eau54")]
-visible = false
 
 [connection signal="ammo_count_changed" from="Player" to="Ui" method="_on_rigid_body_2d_ammo_count_changed"]
