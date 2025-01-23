@@ -5,6 +5,7 @@ var recoil_force_trans = 1000
 var recoil_force_rot = -3000
 var rotation_speed = 25000
 var target
+var impact_strength = 350
 var can_follow_cursor = true
 var follow_delay = 0.3  # Adjust the delay as needed
 var follow_delay_timer = 0.0
@@ -120,7 +121,6 @@ func take_damage(amount: int) -> void:
 	if current_health == 0:
 		die() #death function
 
-
 func heal(amount: int) -> void:
 	current_health += amount
 	if current_health > max_health:
@@ -132,4 +132,7 @@ func die() -> void:
 	
 func _on_body_entered(collided: Node2D) -> void:
 	if collided is EnemyBase:
-		emit_signal("melee_attack")
+		if collided.has_method("_on_melee_hit"):
+			collided._on_melee_hit()
+		var coliDirection = (collided.position - self.position).normalized()
+		linear_velocity = -coliDirection * impact_strength
