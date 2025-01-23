@@ -12,9 +12,16 @@ var safe_distance = 100
 var player_location
 var bullet_speed = 1500
 var bullet_offset = Vector2(80,-30)
+var impact_strength = 1000
 var shot_timer = 0.0
 var fire_rate = 1
 var moving = false
+var tint_frames = 30
+var current_tint_frame = 0
+var is_tinted = false
+var tinterShader = preload("res://Shaders/tinter.gdshader")
+var shaderTint = 0.3
+var shaderColor = Color.RED
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,11 +29,23 @@ func _ready() -> void:
 	ray_caster = $RayCast2D
 	ray_caster.enabled = true
 	lock_rotation = true
+	var sprite = $Legs
+	var sprite2 = $TorsoSprite
+	$Legs.material = ShaderMaterial.new()
+	$Legs.material.shader = tinterShader
+	$Legs.material.set_shader_parameter("color", shaderColor)
+	sprite2.material = ShaderMaterial.new()
+	sprite2.material.shader = tinterShader
+	sprite2.material.set_shader_parameter("color", shaderColor)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	player_location = player.position
 	move(delta)
+	if is_tinted:
+		current_tint_frame += 1
+		if current_tint_frame >= tint_frames:
+			remove_red_tint()
 
 func _on_bullet_hit() -> void:
 	queue_free()
@@ -56,6 +75,8 @@ func move(delta) -> void:
 		if not moving:
 			$Legs.play("walk")
 		switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
+		if(shot_timer >= fire_rate):
+			attack(direction)
 			
 	elif distance > distance_upper_bound:
 		pursue(direction)
@@ -121,3 +142,20 @@ func switch_anim(facing: int) -> void:
 
 func play_anim_shoot() -> void:
 	$TorsoSprite.play()
+
+func _on_melee_hit() -> void:
+	var direction = (player_location - self.position).normalized()
+	apply_central_impulse(direction*impact_strength)
+	apply_red_tint()
+
+func apply_red_tint() -> void:
+	print("in red tint")
+	$Legs.material.set_shader_parameter("tint_amount", shaderTint)
+	$TorsoSprite.material.set_shader_parameter("tint_amount", shaderTint)
+	is_tinted = true
+	current_tint_frame = 0
+
+func remove_red_tint() -> void:
+	$Legs.material.set_shader_parameter("tint_amount", 0.0)
+	$TorsoSprite.material.set_shader_parameter("tint_amount", 0.0)
+	is_tinted = false

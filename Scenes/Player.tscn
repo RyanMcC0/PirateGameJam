@@ -90,6 +90,8 @@ animations = [{
 
 [node name="Player" type="RigidBody2D"]
 position = Vector2(214, 137)
+contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("1_tyrmk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -101,3 +103,5 @@ scale = Vector2(0.299988, 0.299988)
 sprite_frames = SubResource("SpriteFrames_1whxk")
 animation = &"Idle"
 frame_progress = 0.56742
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
