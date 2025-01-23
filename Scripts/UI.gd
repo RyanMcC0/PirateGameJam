@@ -11,7 +11,7 @@ var BulletProp = preload("res://Scenes/BulletProp.tscn")
 
 func _ready() -> void:
 	$Mag.frame = ammo_count
-	var player = get_parent().get_node("Player")
+	var player = get_parent().get_parent().get_parent().get_node("Player")
 	maxAmmo = player.maxAmmo
 	ammo_count = maxAmmo
 	reload_inst_bullets()
