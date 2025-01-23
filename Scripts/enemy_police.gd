@@ -13,7 +13,7 @@ var accel = 5
 var player_location
 var bullet_speed = 1500
 var bullet_offset = Vector2(80,-30)
-var impact_strength = 1500
+var impact_strength = 800
 var shot_timer = 0.0
 var fire_rate = 1
 var moving = false
@@ -144,7 +144,9 @@ func play_anim_shoot() -> void:
 	$TorsoSprite.play()
 
 func _on_melee_hit() -> void:
+
 	var direction = (player_location - self.position).normalized()
+	shot_timer = 0.0 # Disable shooting after hit
 	apply_central_impulse(-direction*impact_strength)
 	apply_red_tint()
 
