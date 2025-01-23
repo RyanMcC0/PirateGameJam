@@ -5,7 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://d3np345uj17bp" path="res://Scenes/UI.tscn" id="3_m4gfi"]
 [ext_resource type="PackedScene" uid="uid://bf3wgpr4wd7jt" path="res://Scenes/enemy_police.tscn" id="4_8eam8"]
 [ext_resource type="PackedScene" uid="uid://c0562xedba2p3" path="res://Scenes/pause_menu.tscn" id="4_8prwd"]
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
+=======
+[ext_resource type="Texture2D" uid="uid://jm51fcmkhw02" path="res://Assets/Aseprite/lvl1-map-fence.png" id="4_vi5iu"]
+[ext_resource type="PackedScene" uid="uid://bwk4cuyv35eeh" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
+>>>>>>> Stashed changes
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
 
