@@ -5,6 +5,7 @@ var recoil_force_trans = 1000
 var recoil_force_rot = -3000
 var rotation_speed = 25000
 var target
+var impact_strength = 350
 var can_follow_cursor = true
 var follow_delay = 0.3  # Adjust the delay as needed
 var follow_delay_timer = 0.0
@@ -22,6 +23,8 @@ signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
 signal melee_attack()
 signal health_changed(new_health)
+
+@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 
 @onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 
@@ -125,7 +128,6 @@ func take_damage(amount: int) -> void:
 	if current_health == 0:
 		die() #death function
 
-
 func heal(amount: int) -> void:
 	current_health += amount
 	if current_health > max_health:
@@ -138,5 +140,9 @@ func die() -> void:
 
 func _on_body_entered(collided: Node2D) -> void:
 	if collided is EnemyBase:
+		if collided.has_method("_on_melee_hit"):
+			collided._on_melee_hit()
+		var coliDirection = (collided.position - self.position).normalized()
+		linear_velocity = -coliDirection * impact_strength
 		emit_signal("melee_attack")
 

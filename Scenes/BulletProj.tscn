@@ -23,6 +23,8 @@ scale_max = 2.0
 
 [node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_p7eah")
 
 [node name="Bullet" type="Sprite2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8yqr6aut1u18"]
+[gd_scene load_steps=8 format=3 uid="uid://c8yqr6aut1u18"]
 
 [ext_resource type="PackedScene" uid="uid://q82o1q7v1wn4" path="res://Scenes/Levels/testlvl.tscn" id="2_o4y0h"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bwk4cuyv35eeh" path="res://Scenes/upgrade_screen.tscn" id="6_eau54"]
 [ext_resource type="PackedScene" uid="uid://bilnor56d725d" path="res://Scenes/PoliceSpawner.tscn" id="6_3fi62"]
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
+
 
 [node name="Node2D" type="Node2D"]
 
@@ -34,6 +35,9 @@ lock_rotation = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMP3_cg6f7")
+
+[node name="PoliceSpawner" parent="." instance=ExtResource("6_d71qg")]
+position = Vector2(1157, 371)
 
 [node name="UpgradeScreen" parent="." instance=ExtResource("6_eau54")]
 visible = false
