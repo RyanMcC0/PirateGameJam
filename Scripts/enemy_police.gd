@@ -14,12 +14,14 @@ var bullet_speed = 1500
 var bullet_offset = Vector2(80,-30)
 var shot_timer = 0.0
 var fire_rate = 1
+var moving = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_parent().get_node("Player")
 	ray_caster = $RayCast2D
 	ray_caster.enabled = true
+	lock_rotation = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -45,12 +47,22 @@ func move(delta) -> void:
 	#maybe if they do not have line of sight we can reposition them
 	if distance >= distance_lower_bound and distance <= distance_upper_bound:
 		linear_velocity = Vector2(0,0)
+		$Legs.stop
+		$Legs.frame = 0
 		if(shot_timer >= fire_rate):
 			attack(direction)
 	elif distance < distance_lower_bound:
 		retreat(direction)
+		if not moving:
+			$Legs.play("walk")
+		switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
+			
 	elif distance > distance_upper_bound:
 		pursue(direction)
+		if not moving:
+			$Legs.play("walk")
+		switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
+		
 
 func attack(direction) -> void:
 	var bullet_instance = Bullet.instantiate()
@@ -59,11 +71,8 @@ func attack(direction) -> void:
 	# Calculate the global position for the bullet using the offset
 	bullet_instance.position = global_position + (transform.basis_xform(bullet_offset))
 	#get_parent().add_child(bullet_instance)
-	
-	switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
-	
 	#bullet_instance.linear_velocity = bullet_speed * direction
-	
+	play_anim_shoot()
 	shot_timer = 0.0
 
 func retreat(direction) -> void:
@@ -105,7 +114,10 @@ func convertToCardinal(velocity: Vector2) -> int:
 
 func switch_anim(facing: int) -> void:
 	match facing:
-		0: $TorsoSprite.play("ShootingNorth")
-		1: $TorsoSprite.play("ShootEast")
-		2: $TorsoSprite.play("ShootSouth")
-		3: $TorsoSprite.play("ShootWest")
+		0: $TorsoSprite.animation = "ShootingNorth"
+		1: $TorsoSprite.animation = "ShootEast"
+		2: $TorsoSprite.animation = "ShootSouth"
+		3: $TorsoSprite.animation = "ShootWest"
+
+func play_anim_shoot() -> void:
+	$TorsoSprite.play()

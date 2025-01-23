@@ -63,7 +63,7 @@ func eject_bullet() -> void:
 
   		 # Apply random central and rotational impulses
 		var randomImpulse = randomEject()
-		print(randomImpulse)
+		#print(randomImpulse)
 		bulletPropInstance.apply_central_impulse(Vector2(randomImpulse.x, randomImpulse.y))
 		bulletPropInstance.apply_torque(randomImpulse.z)
 

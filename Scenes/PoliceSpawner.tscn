@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bilnor56d725d"]
+
+[ext_resource type="Script" path="res://Scripts/police_spawner.gd" id="1_85g4n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xw8e"]
+size = Vector2(64, 139)
+
+[sub_resource type="Gradient" id="Gradient_e040o"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n8k6e"]
+gradient = SubResource("Gradient_e040o")
+fill_to = Vector2(0, 0)
+
+[node name="PoliceSpawner" type="RigidBody2D"]
+script = ExtResource("1_85g4n")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_4xw8e")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 8.5)
+scale = Vector2(1, 2.14063)
+texture = SubResource("GradientTexture2D_n8k6e")
+metadata/_edit_group_ = true

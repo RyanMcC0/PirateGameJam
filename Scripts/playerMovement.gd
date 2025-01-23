@@ -18,7 +18,12 @@ var reload_timer = 0.0
 var max_health = 3 #max health of the player
 var current_health = 3 #current health of the player
 
+signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
+signal melee_attack()
+signal health_changed(new_health)
+
+@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 
 # Load the bullet scene
 var Bullet = preload("res://Scenes/BulletProj.tscn")
@@ -111,9 +116,6 @@ func follow_cursor(delta: float) -> void:
 		rotation = target_angle
 		angular_velocity = Vector2(0,0)
 
-func broadcast_signals() -> void:
-	pass
-
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
@@ -130,10 +132,11 @@ func heal(amount: int) -> void:
 		current_health = max_health
 	emit_signal("health_changed", current_health) #emit new health value
 
-
 func die() -> void:
 	get_tree().change_scene_to_file("res://Scenes/GameOver.tscn") #change scene to death scene upon player death
 
-signal health_changed(new_health)
 
-@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
+func _on_body_entered(collided: Node2D) -> void:
+	if collided is EnemyBase:
+		emit_signal("melee_attack")
+
