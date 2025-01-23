@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://jm51fcmkhw02" path="res://Assets/Aseprite/lvl1-map-fence.png" id="4_vi5iu"]
 [ext_resource type="PackedScene" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
 
+
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
 
 [node name="Node2D" type="Node2D"]

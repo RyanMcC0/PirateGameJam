@@ -2,6 +2,7 @@ extends CanvasLayer
 
 #list of all available upgrades
 var upgrades = [
+	{"name": "Increase Player Health", "effect": "increase_player_health", "description": "Increase max health by 1"},
 	{"name": "Increase Recoil", "effect": "increase recoil", "description": "Increase recoil by 20%"},
 	{"name": "Decrease Recoil", "effect": "decrease_recoil", "description": "Decrease recoil by 20%"},
 	{"name": "Increase Ammo Capacity", "effect": "increase_ammo_capacity", "description": "Increase max ammo by 1"},
@@ -14,7 +15,6 @@ func _ready() -> void:
 	visible = false # hide upgrade screen initially
 	$HBoxContainer/Upgrade1Container/Upgrade1Button.connect("pressed", Callable(self, "_on_upgrade1_pressed"))
 	$HBoxContainer/Upgrade2Container/Upgrade2Button.connect("pressed", Callable(self, "_on_upgrade2_pressed"))
-
 
 func show_upgrade_screen(player_instance: Node) -> void:
 	visible = true # show upgrade screen
@@ -40,7 +40,7 @@ func _on_upgrade1_pressed() -> void:
 	visible = false # upgrade screen invisible after selection
 
 func _on_upgrade2_pressed() -> void:
-	var effect = $HBoxContainer/Upgrade2Container/Upgrade2ButtonHBoxContainer/Upgrade2Container/Upgrade2Button.get_meta("effect")
+	var effect = $HBoxContainer/Upgrade2Container/Upgrade2Button.get_meta("effect")
 	apply_upgrade(effect)
 	visible = false # upgrade screen invisible after selection
 
@@ -48,10 +48,20 @@ func apply_upgrade(effect: String) -> void:
 	match effect:
 		"increase_recoil":
 			player.recoil_force_trans *= 1.2
+			
 		"decrease_recoil":
 			player.recoil_force_trans *= 1.2
+			
 		"increase_ammo_capacity":
 			player.maxAmmo += 1
 			player.ammoCount = player.maxAmmo
+			
 		"reduce_reload_time":
 			player.reloadTime *= 0.75
+			
+		"increase_player_health":
+			player.max_health += 1 # increase max health by 1
+			player.current_health = player.max_health # set health to max (full heal)
+			player.emit_signal("health_changed", player.current_health) # emit the signal
+			
+		

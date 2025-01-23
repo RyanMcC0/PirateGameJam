@@ -18,12 +18,15 @@ var is_reloading = false
 var reload_timer = 0.0
 var max_health = 3 #max health of the player
 var current_health = 3 #current health of the player
+var kills_since_last_heal = 0 # tracks number of kills
+var kills_for_heal = 3 # number of kills required for heal
 
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
 signal melee_attack()
 
 @onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
+@onready var health_label = get_tree().get_root().get_node("Node2D/Ui/HealthUI/HBoxContainer/Label")
 
 # Load the bullet scene
 var Bullet = preload("res://Scenes/BulletProj.tscn")
@@ -33,6 +36,14 @@ func _ready() -> void:
 	$AnimatedSprite2D.play("Idle")
 	emit_signal("ammo_count_changed", ammoCount)
 	current_health = max_health
+	connect("health_changed", Callable(self, "_on_health_changed"))
+
+
+func _on_health_changed(new_health: int) -> void:
+	if health_label:
+		health_label.text = "x" + str(new_health)
+	else:
+		print("Health Label is null!")
 
 func _physics_process(delta: float) -> void:
 	if follow_delay_timer > 0:
@@ -142,3 +153,4 @@ func _on_body_entered(collided: Node2D) -> void:
 		var coliDirection = (collided.position - self.position).normalized()
 		linear_velocity = -coliDirection * impact_strength
 		emit_signal("melee_attack")
+		
