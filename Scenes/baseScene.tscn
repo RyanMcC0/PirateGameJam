@@ -5,17 +5,21 @@
 [ext_resource type="PackedScene" uid="uid://d3np345uj17bp" path="res://Scenes/UI.tscn" id="3_m4gfi"]
 [ext_resource type="PackedScene" uid="uid://bf3wgpr4wd7jt" path="res://Scenes/enemy_police.tscn" id="4_8eam8"]
 [ext_resource type="PackedScene" uid="uid://c0562xedba2p3" path="res://Scenes/pause_menu.tscn" id="4_8prwd"]
+[ext_resource type="Script" path="res://Scenes/CameraEffects.gd" id="4_vkpkt"]
 [ext_resource type="Texture2D" uid="uid://jm51fcmkhw02" path="res://Assets/Aseprite/lvl1-map-fence.png" id="4_vi5iu"]
 [ext_resource type="PackedScene" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
 
 [node name="Node2D" type="Node2D"]
+metadata/_edit_vertical_guides_ = [64.0, 3648.0]
+metadata/_edit_horizontal_guides_ = [192.0, 1920.0]
 
 [node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
 
 [node name="Player" parent="." instance=ExtResource("2_q4g8i")]
-position = Vector2(829, 547)
+
+position = Vector2(1784, 1051)
 
 [node name="EnemyPolice" parent="." instance=ExtResource("4_8eam8")]
 position = Vector2(385, 533)
@@ -30,14 +34,27 @@ offset_right = 3840.0
 offset_bottom = 2048.0
 texture = ExtResource("4_vi5iu")
 
-[node name="Ui" parent="." instance=ExtResource("3_m4gfi")]
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+
+[node name="Ui" parent="Player/CanvasLayer" instance=ExtResource("3_m4gfi")]
 
 [node name="UpgradeScreen" parent="." instance=ExtResource("6_1fdpl")]
 visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_8prwd")]
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -100)
+limit_left = 64
+limit_top = 100
+limit_right = 3648
+limit_bottom = 2020
+editor_draw_limits = true
+script = ExtResource("4_vkpkt")
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="PauseMenu" instance=ExtResource("4_8prwd")]
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 2.0
@@ -45,4 +62,14 @@ offset_bottom = 2.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[connection signal="ammo_count_changed" from="Player" to="Ui" method="_on_rigid_body_2d_ammo_count_changed"]
+[node name="EnemyPolice" parent="." instance=ExtResource("4_8eam8")]
+position = Vector2(385, 533)
+lock_rotation = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMP3_cg6f7")
+
+[node name="UpgradeScreen" parent="." instance=ExtResource("6_1fdpl")]
+visible = false
+
+[connection signal="ammo_count_changed" from="Player" to="Player/CanvasLayer/Ui" method="_on_rigid_body_2d_ammo_count_changed"]
