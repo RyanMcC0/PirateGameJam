@@ -22,9 +22,6 @@ var current_health = 3 #current health of the player
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
 signal melee_attack()
-signal health_changed(new_health)
-
-@onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 
 @onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 
@@ -145,4 +142,3 @@ func _on_body_entered(collided: Node2D) -> void:
 		var coliDirection = (collided.position - self.position).normalized()
 		linear_velocity = -coliDirection * impact_strength
 		emit_signal("melee_attack")
-
