@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfg37rsvhj0i7"]
+[gd_scene load_steps=5 format=3 uid="uid://bilnor56d725d"]
 
 [ext_resource type="Script" path="res://Scripts/police_spawner.gd" id="1_85g4n"]
 

@@ -12,16 +12,17 @@ func _physics_process(delta: float) -> void:
 #method for detecting collision, inherited from RigidBody2D
 func _on_body_entered(collided: Node2D) -> void:
 	#uncomment for debugging bullet collision
+	#print(collided)
 	if collided is EnemyBase:
 		collided._on_bullet_hit()
 		queue_free()
 	elif collided is TileMapLayer:
-		queue_free()
+		queue_free()#
 	elif collided.name == "player":
 		if collided.has_method("take_damage"):
 			collided.take_damage(1)
 		queue_free()
 	elif collided.name == "PoliceSpawner":
+		print("inside collided police spawner")
 		if collided.has_method("_on_bullet_hit"):
 			collided._on_bullet_hit()
-		queue_free()
