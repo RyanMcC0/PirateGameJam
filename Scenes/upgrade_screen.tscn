@@ -40,12 +40,34 @@ offset_bottom = -125.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Upgrade1Button" type="Button" parent="HBoxContainer"]
+[node name="Upgrade1Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Upgrade1Button" type="Button" parent="HBoxContainer/Upgrade1Container"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Upgrade 1 "
 
-[node name="Upgrade2Button" type="Button" parent="HBoxContainer"]
+[node name="Upgrade1Description" type="Label" parent="HBoxContainer/Upgrade1Container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Description 1
+"
+
+[node name="Upgrade2Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 1
+
+[node name="Upgrade2Button" type="Button" parent="HBoxContainer/Upgrade2Container"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Upgrade 2 "
+
+[node name="Upgrade2Description" type="Label" parent="HBoxContainer/Upgrade2Container"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "Description 2"
