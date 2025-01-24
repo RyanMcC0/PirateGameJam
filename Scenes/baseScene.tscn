@@ -44,9 +44,10 @@ position = Vector2(385, 533)
 lock_rotation = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+
 stream = SubResource("AudioStreamMP3_cg6f7")
 
-[node name="UpgradeScreen" parent="." instance=ExtResource("6_1fdpl")]
+[node name="UpgradeScreen2" parent="." instance=ExtResource("6_1fdpl")]
 visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
