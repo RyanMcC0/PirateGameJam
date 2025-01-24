@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var speed: float = 1500.0 # bullet speed
 var homing_enabled: bool = false # is homing active?
-var homing_strength: float = 0.8 # strength of turning
+var homing_strength: float = 1.0 # strength of turning
 var homing_range: float = 500.0 # max distance for homing
 var target: Node = null # enemy the bullet is homing in on
 
@@ -21,7 +21,7 @@ func adjust_direction(delta: float) -> void:
 	if target and is_instance_valid(target):
 		var to_target = target.global_position - global_position # calc (slang for calculator) direction to target
 		if to_target.length() > homing_range: # stop homing if out of range
-			homing_range = false
+			homing_range = false #Change to is in range boolean
 			return
 		var new_direction = linear_velocity.lerp(to_target.normalized() * speed, homing_strength * delta)
 		linear_velocity = new_direction
