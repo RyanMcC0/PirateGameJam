@@ -21,6 +21,8 @@ var current_health = 3 #current health of the player
 var kills_since_last_heal = 0 # tracks number of kills
 var kills_for_heal = 3 # number of kills required for heal
 var homing_enabled: bool = false
+var homing_strength: float = 1.0 # strength of turning
+var homing_range: float = 500.0 # max distance for homing
 
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)

@@ -8,6 +8,7 @@ var upgrades = [
 	{"name": "Increase Ammo Capacity", "effect": "increase_ammo_capacity", "description": "Increase max ammo by 1"},
 	{"name": "Reduce Reload Time", "effect": "reduce_reload_time", "description": "Reduce reload time by 25%"},
 	{"name": "Homing Bullets", "effect": "enable_homing_bullets", "description": "Bullets adjust direction to home in on the nearest enemy."},
+	{"name": "Increase Bullet Speed", "effect": "increase_bullet_speed", "description": "Increases bullet speed by 20%."},
 
 ]
 
@@ -67,6 +68,11 @@ func apply_upgrade(effect: String) -> void:
 			player.emit_signal("health_changed", player.current_health) # emit the signal
 		"enable_homing_bullets":
 			player.homing_enabled = true
+		"increase_bullet_speed":
+			player.bullet_speed *= 1.2
+			player.homing_strength *= 1.2
+			player.homing_range *= 1.2
+			
 			
 			
 		
