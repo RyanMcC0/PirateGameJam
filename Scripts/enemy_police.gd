@@ -23,6 +23,7 @@ var is_tinted = false
 var tinterShader = preload("res://Shaders/tinter.gdshader")
 var shaderTint = 0.3
 var shaderColor = Color.RED
+var curr_health = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,7 +50,10 @@ func _process(delta: float) -> void:
 			remove_red_tint()
 
 func _on_bullet_hit() -> void:
-	queue_free()
+	apply_red_tint()
+	curr_health -= 1
+	if (curr_health <= 0):
+		queue_free()
 
 #take player location, get to a reasonable distance
 func move(delta) -> void:
@@ -144,7 +148,6 @@ func play_anim_shoot() -> void:
 	$TorsoSprite.play()
 
 func _on_melee_hit() -> void:
-
 	var direction = (player_location - self.position).normalized()
 	shot_timer = 0.0 # Disable shooting after hit
 	apply_central_impulse(-direction*impact_strength)
