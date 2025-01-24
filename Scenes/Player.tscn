@@ -101,7 +101,6 @@ shape = SubResource("CircleShape2D_p3416")
 position = Vector2(-2, -4)
 scale = Vector2(0.299988, 0.299988)
 sprite_frames = SubResource("SpriteFrames_1whxk")
-animation = &"Idle"
-frame_progress = 0.56742
+animation = &"Shooting"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

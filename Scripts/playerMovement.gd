@@ -27,7 +27,7 @@ signal ammo_count_changed(new_ammo_count)
 signal melee_attack()
 
 @onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
-@onready var health_label = get_tree().get_root().get_node("Node2D/Ui/HealthUI/HBoxContainer/Label")
+@onready var health_label = get_tree().get_root().get_node("Node2D/Player/CanvasLayer/Ui/HealthUI/HBoxContainer/Label")
 
 # Load the bullet scene
 var Bullet = preload("res://Scenes/BulletProj.tscn")

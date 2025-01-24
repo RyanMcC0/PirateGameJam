@@ -1,7 +1,7 @@
 [gd_scene load_steps=56 format=3 uid="uid://bf3wgpr4wd7jt"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_police.gd" id="1_3k3rl"]
-[ext_resource type="Texture2D" uid="uid://dylydm0gm8jkp" path="res://Assets/Aseprite/Cop_enemy_shoot_ew-sheet.svg" id="2_nrclf"]
+[ext_resource type="Texture2D" uid="uid://dylydm0gm8jkp" path="res://Assets/Aseprite/Cop_enemy_shoot_ew-Sheet.svg" id="2_nrclf"]
 [ext_resource type="Texture2D" uid="uid://dub7ssbwy05ma" path="res://Assets/Aseprite/Cop_enemy_shoot_south-Sheet.svg" id="3_k0hrm"]
 [ext_resource type="Texture2D" uid="uid://dxi4hc5pt30ni" path="res://Assets/Aseprite/Cop_enemy_shoot_north-Sheet.svg" id="4_apbpr"]
 [ext_resource type="Texture2D" uid="uid://wv0qotgrc2wy" path="res://Assets/Aseprite/Enemy_legs_walk_ns-Sheet.svg" id="5_4b30g"]
