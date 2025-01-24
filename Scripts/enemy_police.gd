@@ -78,7 +78,7 @@ func move(delta) -> void:
 	elif distance < distance_lower_bound:
 		retreat(direction)
 		if not moving:
-			$Legs.play("walk")
+			$Legs.play()
 		switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
 		if(shot_timer >= fire_rate):
 			attack(direction)
@@ -86,7 +86,7 @@ func move(delta) -> void:
 	elif distance > distance_upper_bound:
 		pursue(direction)
 		if not moving:
-			$Legs.play("walk")
+			$Legs.play()
 		switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
 		
 
@@ -139,10 +139,18 @@ func convertToCardinal(velocity: Vector2) -> int:
 
 func switch_anim(facing: int) -> void:
 	match facing:
-		0: $TorsoSprite.animation = "ShootingNorth"
-		1: $TorsoSprite.animation = "ShootEast"
-		2: $TorsoSprite.animation = "ShootSouth"
-		3: $TorsoSprite.animation = "ShootWest"
+		0: 
+			$TorsoSprite.animation = "ShootingNorth"
+			$Legs.animation = "walkNS"
+		1: 
+			$TorsoSprite.animation = "ShootEast"
+			$Legs.animation = "walkEW"
+		2: 
+			$TorsoSprite.animation = "ShootSouth"
+			$Legs.animation = "walkNS"
+		3: 
+			$TorsoSprite.animation = "ShootWest"
+			$Legs.animation = "walkEW"
 
 func play_anim_shoot() -> void:
 	$TorsoSprite.play()
