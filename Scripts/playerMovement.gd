@@ -20,6 +20,7 @@ var max_health = 3 #max health of the player
 var current_health = 3 #current health of the player
 var kills_since_last_heal = 0 # tracks number of kills
 var kills_for_heal = 3 # number of kills required for heal
+var homing_enabled: bool = false
 
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
@@ -90,6 +91,10 @@ func shoot_bullet() -> void:
 		# Calculate the global position for the bullet using the offset
 		var bullet_global_position = global_position + (transform.basis_xform(bullet_offset))
 		bullet_instance.position = bullet_global_position
+		#check if homing is enabled and assign a target if true
+		if homing_enabled:
+			bullet_instance.homing_enabled = true
+			bullet_instance.target = get_nearest_enemy() # get the nearest enemy to the bullet	
 		get_parent().add_child(bullet_instance)
 		bullet_instance.linear_velocity = bullet_speed * bullet_direction
 		$AnimatedSprite2D.play("Shooting")
@@ -153,4 +158,16 @@ func _on_body_entered(collided: Node2D) -> void:
 		var coliDirection = (collided.position - self.position).normalized()
 		linear_velocity = -coliDirection * impact_strength
 		emit_signal("melee_attack")
+
+func get_nearest_enemy() -> Node:
+	var nearest_enemy = null
+	var shortest_distance = INF
+	
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if is_instance_valid(enemy):
+			var distance = global_position.distance_to(enemy.global_position)
+			if distance < shortest_distance:
+				shortest_distance = distance
+				nearest_enemy = enemy
+	return nearest_enemy
 		
