@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dylydm0gm8jkp"
-path="res://.godot/imported/Cop_enemy_shoot_ew-Sheet.svg-efbf6e2918a9e63aa444d3945a278725.ctex"
+uid="uid://wv0qotgrc2wy"
+path="res://.godot/imported/Enemy_legs_walk_ns-Sheet.svg-0487dfa8f3be6b50eea3192cf0cdc889.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Aseprite/Cop_enemy_shoot_ew-Sheet.svg"
-dest_files=["res://.godot/imported/Cop_enemy_shoot_ew-Sheet.svg-efbf6e2918a9e63aa444d3945a278725.ctex"]
+source_file="res://Assets/Aseprite/Enemy_legs_walk_ns-Sheet.svg"
+dest_files=["res://.godot/imported/Enemy_legs_walk_ns-Sheet.svg-0487dfa8f3be6b50eea3192cf0cdc889.ctex"]
 
 [params]
 
