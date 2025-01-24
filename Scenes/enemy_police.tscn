@@ -1,9 +1,10 @@
-[gd_scene load_steps=45 format=3 uid="uid://bf3wgpr4wd7jt"]
+[gd_scene load_steps=56 format=3 uid="uid://bf3wgpr4wd7jt"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_police.gd" id="1_3k3rl"]
-[ext_resource type="Texture2D" uid="uid://dylydm0gm8jkp" path="res://Assets/Aseprite/Cop_enemy_shoot_ew-sheet.svg" id="2_nrclf"]
+[ext_resource type="Texture2D" uid="uid://dylydm0gm8jkp" path="res://Assets/Aseprite/Cop_enemy_shoot_ew-Sheet.svg" id="2_nrclf"]
 [ext_resource type="Texture2D" uid="uid://dub7ssbwy05ma" path="res://Assets/Aseprite/Cop_enemy_shoot_south-Sheet.svg" id="3_k0hrm"]
 [ext_resource type="Texture2D" uid="uid://dxi4hc5pt30ni" path="res://Assets/Aseprite/Cop_enemy_shoot_north-Sheet.svg" id="4_apbpr"]
+[ext_resource type="Texture2D" uid="uid://wv0qotgrc2wy" path="res://Assets/Aseprite/Enemy_legs_walk_ns-Sheet.svg" id="5_4b30g"]
 [ext_resource type="Texture2D" uid="uid://wd3p7oqv4nwt" path="res://Assets/Aseprite/Enemy_legs_walk_ew-Sheet.svg" id="5_x8321"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v8dg6"]
@@ -267,6 +268,46 @@ region = Rect2(1280, 0, 256, 256)
 atlas = ExtResource("5_x8321")
 region = Rect2(1536, 0, 256, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_17d3t"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsp0k"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eh3ms"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kbxo"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21vd2"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_meeo3"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(1280, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtoyj"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(1536, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_komyv"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(1792, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esfu2"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(2048, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnx5f"]
+atlas = ExtResource("5_4b30g")
+region = Rect2(2304, 0, 256, 256)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_btsad"]
 animations = [{
 "frames": [{
@@ -292,7 +333,42 @@ animations = [{
 "texture": SubResource("AtlasTexture_0od74")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"walkEW",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17d3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsp0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eh3ms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kbxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21vd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_meeo3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtoyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_komyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esfu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnx5f")
+}],
+"loop": true,
+"name": &"walkNS",
 "speed": 10.0
 }]
 
@@ -313,12 +389,13 @@ polygon = PackedVector2Array(-32, -60, -32, -13, -41, -11, -50, 4, -50, 35, -34,
 material = SubResource("ShaderMaterial_v8dg6")
 position = Vector2(1, 2)
 sprite_frames = SubResource("SpriteFrames_cdoh1")
-animation = &"ShootEast"
+animation = &"ShootSouth"
 
 [node name="Legs" type="AnimatedSprite2D" parent="."]
 position = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_btsad")
-animation = &"walk"
+animation = &"walkNS"
+frame_progress = 0.654925
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
