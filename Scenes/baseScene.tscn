@@ -61,10 +61,4 @@ offset_bottom = 2.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Music2" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamMP3_cg6f7")
-
-[node name="UpgradeScreen2" parent="." instance=ExtResource("6_1fdpl")]
-visible = false
-
 [connection signal="ammo_count_changed" from="Player" to="Player/CanvasLayer/Ui" method="_on_rigid_body_2d_ammo_count_changed"]
