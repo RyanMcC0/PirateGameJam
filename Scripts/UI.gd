@@ -22,7 +22,8 @@ func _on_rigid_body_2d_ammo_count_changed(new_ammo_count: Variant) -> void:
 			reload_anim() #Calls reload animation
 			reload_inst_bullets() #Reinstantiate the bullet objects in the magazine for animation
 		else:
-			eject_bullet()
+			if new_ammo_count != maxAmmo:
+				eject_bullet()
 		ammo_count = new_ammo_count
 		update_mag_anim()
 
