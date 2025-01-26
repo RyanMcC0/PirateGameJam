@@ -11,7 +11,7 @@ var movement_speed = 100
 var safe_distance = 100
 var accel = 5
 var player_location
-var bullet_speed = 1500
+var bullet_speed = 500
 var bullet_offset = Vector2(80,-30)
 var impact_strength = 800
 var shot_timer = 0.0

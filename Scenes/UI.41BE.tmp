@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3np345uj17bp"]
+
+[ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
+[ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
+[ext_resource type="Script" path="res://Scripts/health_ui.gd" id="3_t6grl"]
+[ext_resource type="Texture2D" uid="uid://dx6kdj0ph28vo" path="res://Assets/Heart Sprite.png" id="4_bq1nb"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eua4s"]
+size = Vector2(1920, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwpdf"]
+atlas = ExtResource("2_ldcvm")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yn503"]
+size = Vector2(156, 878)
+
+[node name="Ui" type="Node2D"]
+script = ExtResource("1_4ffvu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("PlaceholderTexture2D_eua4s")
+
+[node name="AmmoCounter" type="Node2D" parent="."]
+position = Vector2(706, 103)
+scale = Vector2(0.941996, 0.941996)
+
+[node name="Mag" type="Sprite2D" parent="."]
+position = Vector2(80, 195)
+scale = Vector2(0.669006, 0.669006)
+texture = SubResource("AtlasTexture_cwpdf")
+hframes = 10
+frame = 9
+
+[node name="BulletCollider" type="StaticBody2D" parent="Mag"]
+visible = false
+position = Vector2(-1572.48, -19.4318)
+scale = Vector2(1.49475, 1.49475)
+collision_layer = 2
+collision_mask = 2
+
+[node name="BulletCollider" type="CollisionShape2D" parent="Mag/BulletCollider"]
+visible = false
+position = Vector2(862, 341)
+shape = SubResource("RectangleShape2D_yn503")
+
+[node name="HealthUI" type="CanvasLayer" parent="."]
+script = ExtResource("3_t6grl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HealthUI"]
+offset_left = 28.0
+offset_top = 26.0
+offset_right = 341.0
+offset_bottom = 218.0
+scale = Vector2(0.344383, 0.344383)
+
+[node name="TextureRect" type="TextureRect" parent="HealthUI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_bq1nb")
+
+[node name="Label" type="Label" parent="HealthUI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 17
+theme_override_font_sizes/font_size = 90
+text = "x3"

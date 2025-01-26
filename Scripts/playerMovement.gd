@@ -29,7 +29,8 @@ signal ammo_count_changed(new_ammo_count)
 signal melee_attack()
 
 @onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
-@onready var health_label = get_tree().get_root().get_node("Node2D/Player/CanvasLayer/Ui/HealthUI/HBoxContainer/Label")
+@onready var health_label = get_tree().get_root().get_node("Node2D/Player/UI/Ui/HealthUI/HBoxContainer/Label")
+@onready var loadingCircle = get_tree().get_root().get_node("Node2D/Player/UI/Ui/Mag/loadingBar") 
 
 # Load the bullet scene
 var Bullet = preload("res://Scenes/BulletProj.tscn")
@@ -57,6 +58,7 @@ func _physics_process(delta: float) -> void:
 
 	if is_reloading:
 		reload_timer = clamp(reload_timer - delta, 0, reloadTime)
+		update_reload_animation()
 		if reload_timer == 0:
 			is_reloading = false
 			ammoCount = maxAmmo
@@ -69,6 +71,18 @@ func _physics_process(delta: float) -> void:
 		follow_cursor(delta)
 
 	apply_friction(delta)
+
+func start_reload() -> void:
+	is_reloading = true
+	reload_timer = reloadTime
+	loadingCircle.visible = true
+
+func update_reload_animation() -> void:
+	var frame_duration = reloadTime / 11.0  # Calculate the duration of each frame
+	var current_frame = int((reloadTime - reload_timer) / frame_duration)
+	loadingCircle.frame = current_frame
+	if current_frame == 11:
+		loadingCircle.visible = false
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -105,10 +119,6 @@ func shoot_bullet() -> void:
 		if ammoCount == 0:
 			start_reload()
 
-func start_reload() -> void:
-	is_reloading = true
-	reload_timer = reloadTime
-	#$AnimatedSprite2D.play("Reloading")
 
 func add_force() -> void:
 	var direction = -transform.x.normalized()  # Get the direction opposite to where the node is facing
