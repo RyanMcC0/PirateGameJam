@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgmyn1yk5ls7m"]
+[gd_scene load_steps=4 format=3 uid="uid://bgmyn1yk5ls7m"]
 
+[ext_resource type="Script" path="res://Scripts/bulletFaseOut.gd" id="1_8sdl0"]
 [ext_resource type="Texture2D" uid="uid://k670sv8wcn3s" path="res://Assets/bullet.svg" id="2_koq7n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_675ci"]
@@ -13,6 +14,7 @@ collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
 constant_force = Vector2(0, 500)
+script = ExtResource("1_8sdl0")
 
 [node name="BulletUI" type="Sprite2D" parent="."]
 position = Vector2(-1.13687e-13, 9.53674e-07)

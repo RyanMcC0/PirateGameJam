@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3np345uj17bp"]
+[gd_scene load_steps=21 format=3 uid="uid://d3np345uj17bp"]
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
 [ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
+[ext_resource type="Texture2D" uid="uid://b42kekwatuq3f" path="res://Assets/Aseprite/loading.png" id="3_c8xae"]
 [ext_resource type="Script" path="res://Scripts/health_ui.gd" id="3_t6grl"]
 [ext_resource type="Texture2D" uid="uid://dx6kdj0ph28vo" path="res://Assets/Heart Sprite.png" id="4_bq1nb"]
 
@@ -12,12 +13,98 @@ size = Vector2(1920, 192)
 atlas = ExtResource("2_ldcvm")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yn503"]
-size = Vector2(1920, 20)
+size = Vector2(156, 878)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfv1v"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgx8g"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gykq6"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmmin"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eutxu"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47klt"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(1280, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnmsn"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(1536, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jv0a"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(1792, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i60et"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(2048, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1ryi"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(2304, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpqkp"]
+atlas = ExtResource("3_c8xae")
+region = Rect2(2560, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebern"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfv1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgx8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gykq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmmin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eutxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47klt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnmsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jv0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i60et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1ryi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpqkp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Ui" type="Node2D"]
 script = ExtResource("1_4ffvu")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("PlaceholderTexture2D_eua4s")
@@ -27,28 +114,39 @@ position = Vector2(706, 103)
 scale = Vector2(0.941996, 0.941996)
 
 [node name="Mag" type="Sprite2D" parent="."]
-position = Vector2(633, 99)
+position = Vector2(89, 213)
 scale = Vector2(0.669006, 0.669006)
 texture = SubResource("AtlasTexture_cwpdf")
 hframes = 10
+frame = 9
 
-[node name="BulletCollider" type="StaticBody2D" parent="."]
+[node name="BulletCollider" type="StaticBody2D" parent="Mag"]
+visible = false
+position = Vector2(-1572.48, -19.4318)
+scale = Vector2(1.49475, 1.49475)
 collision_layer = 2
 collision_mask = 2
 
-[node name="BulletCollider" type="CollisionShape2D" parent="BulletCollider"]
-position = Vector2(960, 202)
+[node name="BulletCollider" type="CollisionShape2D" parent="Mag/BulletCollider"]
+visible = false
+position = Vector2(862, 341)
 shape = SubResource("RectangleShape2D_yn503")
+
+[node name="loadingBar" type="AnimatedSprite2D" parent="Mag"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ebern")
+frame = 2
+frame_progress = 0.664215
 
 [node name="HealthUI" type="CanvasLayer" parent="."]
 script = ExtResource("3_t6grl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HealthUI"]
-offset_left = 240.0
-offset_top = 50.0
-offset_right = 448.0
-offset_bottom = 242.0
-scale = Vector2(0.5, 0.5)
+offset_left = 35.0
+offset_top = 35.0
+offset_right = 348.0
+offset_bottom = 227.0
+scale = Vector2(0.344383, 0.344383)
 
 [node name="TextureRect" type="TextureRect" parent="HealthUI/HBoxContainer"]
 layout_mode = 2

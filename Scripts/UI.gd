@@ -2,20 +2,31 @@ extends Node2D
 
 var ammo_count = 0
 var maxAmmo
-var bulletPositions = [Vector2(624,33),Vector2(626,47),Vector2(629,61),Vector2(631,74),Vector2(633,90),Vector2(636,105),Vector2(639,119),Vector2(641,135),Vector2(644,150)]
-var ejectPosition = Vector2(619,13)
+var bulletPositions: Array
+var bulletOffsets = [Vector2(0,0), Vector2(4,14), Vector2(7,28), Vector2(10,42), Vector2(12,56), Vector2(13,70), Vector2(15,84), Vector2(17,98), Vector2(19,113)]
+var ejectPosition = Vector2(-10,-80)
+var magOff = Vector2(13,65)
 var magBulletQueue: Array
 var ejectBulletQueue: Array
 var BulletUI = preload("res://Scenes/BulletUI.tscn")
 var BulletProp = preload("res://Scenes/BulletProp.tscn")
 
+
 func _ready() -> void:
+	await getBulletPos()
 	$Mag.frame = ammo_count
 	var player = get_parent().get_parent().get_parent().get_node("Player")
 	maxAmmo = player.maxAmmo
 	ammo_count = maxAmmo
 	reload_inst_bullets()
 
+
+func getBulletPos() -> void: 
+	for pos in bulletOffsets:
+		bulletPositions.append($Mag.position-magOff+pos)
+	ejectPosition = $Mag.position + ejectPosition
+		
+	
 func _on_rigid_body_2d_ammo_count_changed(new_ammo_count: Variant) -> void:
 	if maxAmmo != null:
 		if ammo_count < new_ammo_count:
