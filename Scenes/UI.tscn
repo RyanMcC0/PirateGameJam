@@ -121,19 +121,16 @@ hframes = 10
 frame = 9
 
 [node name="BulletCollider" type="StaticBody2D" parent="Mag"]
-visible = false
 position = Vector2(-1572.48, -19.4318)
 scale = Vector2(1.49475, 1.49475)
 collision_layer = 2
 collision_mask = 2
 
 [node name="BulletCollider" type="CollisionShape2D" parent="Mag/BulletCollider"]
-visible = false
 position = Vector2(862, 341)
 shape = SubResource("RectangleShape2D_yn503")
 
 [node name="loadingBar" type="AnimatedSprite2D" parent="Mag"]
-visible = false
 sprite_frames = SubResource("SpriteFrames_ebern")
 frame = 2
 frame_progress = 0.664215

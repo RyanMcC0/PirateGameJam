@@ -35,11 +35,13 @@ func _on_body_entered(collided: Node2D) -> void:
 		queue_free()
 	elif collided is TileMapLayer:
 		queue_free()
-	elif collided.name == "player":
+	elif collided.name == "Player":
 		if collided.has_method("take_damage"):
 			collided.take_damage(1)
 		queue_free()
 	elif collided.name == "PoliceSpawner":
 		if collided.has_method("_on_bullet_hit"):
 			collided._on_bullet_hit()
+		queue_free()
+	elif collided.name == "BulletPlayer" or collided.name == "BulletEnemy":
 		queue_free()

@@ -41,7 +41,7 @@ editor_draw_limits = true
 script = ExtResource("4_vkpkt")
 
 [node name="EnemyPolice" parent="." instance=ExtResource("4_8eam8")]
-position = Vector2(385, 533)
+position = Vector2(902, 1056)
 lock_rotation = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
