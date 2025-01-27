@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfr7814dfbef6"]
+
+[sub_resource type="Gradient" id="Gradient_cirj1"]
+offsets = PackedFloat32Array(0, 0.985294, 1)
+colors = PackedColorArray(0.513726, 0, 0, 1, 1, 0.658824, 0, 1, 1, 0.639216, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vn86l"]
+gradient = SubResource("Gradient_cirj1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2lkpt"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(0, -2, 0)
+spread = 75.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 200, 0)
+scale_min = 10.0
+scale_max = 20.0
+color_ramp = SubResource("GradientTexture1D_vn86l")
+turbulence_noise_strength = 0.12
+turbulence_noise_scale = 0.618
+collision_mode = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_2lkpt")
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60

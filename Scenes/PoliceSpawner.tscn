@@ -1,27 +1,150 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfg37rsvhj0i7"]
+[gd_scene load_steps=22 format=3 uid="uid://dfg37rsvhj0i7"]
 
 [ext_resource type="Script" path="res://Scripts/police_spawner.gd" id="1_85g4n"]
+[ext_resource type="Texture2D" uid="uid://0agqe77jla4b" path="res://Assets/Aseprite/car-burnt.png" id="2_sfo2f"]
+[ext_resource type="Texture2D" uid="uid://dqd06nsh223g8" path="res://Assets/Aseprite/car-idle-sheet.png" id="2_sr6c2"]
+[ext_resource type="Texture2D" uid="uid://dilns5senifho" path="res://Assets/Aseprite/car-fire-sheet.png" id="3_d3xa4"]
+[ext_resource type="Texture2D" uid="uid://d2i1t1r2jpdqf" path="res://Assets/Aseprite/car-spawn-enemy-sheet.png" id="5_yxn4s"]
+[ext_resource type="PackedScene" uid="uid://cfr7814dfbef6" path="res://Scenes/explosionParticles.tscn" id="6_g2mqx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xw8e"]
-size = Vector2(64, 139)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt1i5"]
+atlas = ExtResource("3_d3xa4")
+region = Rect2(0, 0, 256, 128)
 
-[sub_resource type="Gradient" id="Gradient_e040o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cbtf"]
+atlas = ExtResource("3_d3xa4")
+region = Rect2(256, 0, 256, 128)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_n8k6e"]
-gradient = SubResource("Gradient_e040o")
-fill_to = Vector2(0, 0)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4uru"]
+atlas = ExtResource("3_d3xa4")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7adgk"]
+atlas = ExtResource("3_d3xa4")
+region = Rect2(768, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua3rv"]
+atlas = ExtResource("3_d3xa4")
+region = Rect2(1024, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djwq0"]
+atlas = ExtResource("3_d3xa4")
+region = Rect2(1280, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j1w3"]
+atlas = ExtResource("3_d3xa4")
+region = Rect2(1536, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_318vc"]
+atlas = ExtResource("2_sr6c2")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2sho"]
+atlas = ExtResource("2_sr6c2")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he0nj"]
+atlas = ExtResource("5_yxn4s")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7exqd"]
+atlas = ExtResource("5_yxn4s")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7xeg"]
+atlas = ExtResource("5_yxn4s")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th7nj"]
+atlas = ExtResource("5_yxn4s")
+region = Rect2(768, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgm8p"]
+atlas = ExtResource("5_yxn4s")
+region = Rect2(1024, 0, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dybom"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sfo2f")
+}],
+"loop": true,
+"name": &"burned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt1i5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cbtf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4uru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7adgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ua3rv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djwq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0j1w3")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_318vc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2sho")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he0nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7exqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7xeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th7nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgm8p")
+}],
+"loop": true,
+"name": &"spawn_enemy",
+"speed": 5.0
+}]
 
 [node name="PoliceSpawner" type="RigidBody2D"]
+collision_layer = 72
+collision_mask = 72
 script = ExtResource("1_85g4n")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8.5)
-shape = SubResource("RectangleShape2D_4xw8e")
-metadata/_edit_group_ = true
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(126, 48, 99, 49, 91, 61, 69, 61, 57, 52, -59, 52, -69, 63, -85, 63, -95, 53, -127, 53, -127, 19, -114, 19, -80, 10, -56, 8, -28, -11, -4, -14, -2, -20, 30, -20, 30, -14, 56, -11, 96, 6, 118, 8, 126, 26, 130, 39)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 8.5)
-scale = Vector2(1, 2.14063)
-texture = SubResource("GradientTexture2D_n8k6e")
-metadata/_edit_group_ = true
+[node name="Car" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_dybom")
+animation = &"idle"
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("6_g2mqx")]
+position = Vector2(14, 27)
