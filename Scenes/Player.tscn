@@ -90,6 +90,8 @@ animations = [{
 
 [node name="Player" type="RigidBody2D"]
 position = Vector2(214, 137)
+collision_layer = 133
+collision_mask = 133
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("1_tyrmk")

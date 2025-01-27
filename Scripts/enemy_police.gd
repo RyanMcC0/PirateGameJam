@@ -3,7 +3,7 @@ extends EnemyBase
 #Node references
 var player: Node2D
 var ray_caster: RayCast2D
-var Bullet = preload("res://Scenes/BulletProj.tscn")
+var Bullet = preload("res://Scenes/BulletProjEnemy.tscn")
 
 #Global variables
 var shooting_distance = 400
@@ -15,15 +15,22 @@ var bullet_speed = 500
 var bullet_offset = Vector2(80,-30)
 var impact_strength = 800
 var shot_timer = 0.0
-var fire_rate = 1
+var fire_rate = 2
 var moving = false
-var tint_frames = 30
+var tint_frames = 50
 var current_tint_frame = 0
 var is_tinted = false
 var tinterShader = preload("res://Shaders/tinter.gdshader")
 var shaderTint = 0.3
 var shaderColor = Color.RED
 var curr_health = 2
+
+var bullet_offsets = {
+	0: Vector2(0, 30),  # South
+	1: Vector2(88, 8),   # East
+	2: Vector2(0, -100),   # North
+	3: Vector2(-88, 8)   # West
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -92,11 +99,20 @@ func move(delta) -> void:
 
 func attack(direction) -> void:
 	var bullet_instance = Bullet.instantiate()
-	bullet_instance.rotation = rotation+(PI/2)
+	bullet_instance.rotation = direction.angle() + (PI / 2)
+	switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
+
+	# Determine the cardinal direction
+	var cardinal_direction = convertToCardinal(direction)
+	var offset = bullet_offsets[cardinal_direction]
+
 	# Calculate the global position for the bullet using the offset
-	bullet_instance.position = global_position + (transform.basis_xform(bullet_offset))
-	#get_parent().add_child(bullet_instance)
-	#bullet_instance.linear_velocity = bullet_speed * direction
+	var bullet_global_position = global_position + (transform.basis_xform(offset))
+	bullet_instance.position = bullet_global_position
+
+	get_parent().add_child(bullet_instance)
+	bullet_instance.linear_velocity = bullet_speed * direction
+
 	play_anim_shoot()
 	shot_timer = 0.0
 
@@ -159,6 +175,9 @@ func _on_melee_hit() -> void:
 	var direction = (player_location - self.position).normalized()
 	shot_timer = 0.0 # Disable shooting after hit
 	apply_central_impulse(-direction*impact_strength)
+	curr_health -= 1
+	if (curr_health <= 0):
+		queue_free()
 	apply_red_tint()
 
 func apply_red_tint() -> void:

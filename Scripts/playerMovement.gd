@@ -23,6 +23,14 @@ var kills_for_heal = 3 # number of kills required for heal
 var homing_enabled: bool = false
 var homing_strength: float = 1.0 # strength of turning
 var homing_range: float = 500.0 # max distance for homing
+var tint_frames = 50
+var current_tint_frame = 0
+var is_tinted = false
+var tinterShader = preload("res://Shaders/tinter.gdshader")
+var shaderTint = 0.3
+var shaderColor = Color.RED
+var curr_health = 2
+
 
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
@@ -33,7 +41,7 @@ signal melee_attack()
 @onready var loadingCircle = get_tree().get_root().get_node("Node2D/Player/UI/Ui/Mag/loadingBar") 
 
 # Load the bullet scene
-var Bullet = preload("res://Scenes/BulletProj.tscn")
+var Bullet = preload("res://Scenes/BulletProjPlayer.tscn")
 
 func _ready() -> void:
 	# Play the idle animation
@@ -41,7 +49,9 @@ func _ready() -> void:
 	emit_signal("ammo_count_changed", ammoCount)
 	current_health = max_health
 	connect("health_changed", Callable(self, "_on_health_changed"))
-
+	$AnimatedSprite2D.material = ShaderMaterial.new()
+	$AnimatedSprite2D.material.shader = tinterShader
+	$AnimatedSprite2D.material.set_shader_parameter("color", shaderColor)
 
 func _on_health_changed(new_health: int) -> void:
 	if health_label:
@@ -71,6 +81,12 @@ func _physics_process(delta: float) -> void:
 		follow_cursor(delta)
 
 	apply_friction(delta)
+
+func _process(delta: float) -> void:
+	if is_tinted:
+		current_tint_frame += 1
+		if current_tint_frame >= tint_frames:
+			remove_red_tint()
 
 func start_reload() -> void:
 	is_reloading = true
@@ -146,6 +162,7 @@ func follow_cursor(delta: float) -> void:
 
 
 func take_damage(amount: int) -> void:
+	apply_red_tint()
 	current_health -= amount
 	if current_health < 0:
 		current_health = 0 # Prevent health going below zero
@@ -183,3 +200,12 @@ func get_nearest_enemy() -> Node:
 				nearest_enemy = enemy
 	return nearest_enemy
 		
+
+func apply_red_tint() -> void:
+	$AnimatedSprite2D.material.set_shader_parameter("tint_amount", shaderTint)
+	is_tinted = true
+	current_tint_frame = 0
+
+func remove_red_tint() -> void:
+	$AnimatedSprite2D.material.set_shader_parameter("tint_amount", 0.0)
+	is_tinted = false
