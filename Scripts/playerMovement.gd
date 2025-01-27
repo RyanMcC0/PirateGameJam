@@ -66,12 +66,6 @@ func _physics_process(delta: float) -> void:
 			can_follow_cursor = true
 			$AnimatedSprite2D.play("Idle")
 
-func _process(delta: float) -> void:
-	if is_tinted:
-		current_tint_frame += 1
-		if current_tint_frame >= tint_frames:
-			remove_red_tint()
-
 	if is_reloading:
 		reload_timer = clamp(reload_timer - delta, 0, reloadTime)
 		update_reload_animation()
@@ -87,6 +81,12 @@ func _process(delta: float) -> void:
 		follow_cursor(delta)
 
 	apply_friction(delta)
+
+func _process(delta: float) -> void:
+	if is_tinted:
+		current_tint_frame += 1
+		if current_tint_frame >= tint_frames:
+			remove_red_tint()
 
 func start_reload() -> void:
 	is_reloading = true
