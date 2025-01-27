@@ -175,6 +175,9 @@ func _on_melee_hit() -> void:
 	var direction = (player_location - self.position).normalized()
 	shot_timer = 0.0 # Disable shooting after hit
 	apply_central_impulse(-direction*impact_strength)
+	curr_health -= 1
+	if (curr_health <= 0):
+		queue_free()
 	apply_red_tint()
 
 func apply_red_tint() -> void:
