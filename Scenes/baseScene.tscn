@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c0562xedba2p3" path="res://Scenes/pause_menu.tscn" id="4_8prwd"]
 [ext_resource type="Script" path="res://Scripts/UIOpacity.gd" id="4_ggx8l"]
 [ext_resource type="Script" path="res://Scripts/CameraEffects.gd" id="4_vkpkt"]
-[ext_resource type="PackedScene" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
+[ext_resource type="PackedScene" uid="uid://d2xvudm1veb0w" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
 

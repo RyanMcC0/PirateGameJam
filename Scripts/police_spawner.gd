@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 		update_respawn_animation()
 	if respawn_timer == 0 and !is_destroyed:
 		is_respawning = false
-		$Car.play("Idle")
+		$Car.play("idle")
 
 func start_respawn() -> void:
 	is_respawning = true
@@ -89,7 +89,7 @@ func spawn_enemy() -> void:
 func _on_bullet_hit() -> void:
 	apply_red_tint()
 	health_max -= 1
-	if(health_max <= 0):
+	if(health_max <= 0) and !is_destroyed:
 		$Car.play("fire")
 		is_fired = true
 		is_destroyed = true

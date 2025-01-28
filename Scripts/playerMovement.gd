@@ -112,7 +112,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("heal"):
 		heal(1)
 	if Input.is_action_just_pressed("show_upgrade"):
-		upgrade_screen.show_upgrade_screen(self)
+		upgrade_screen.show_upgrade_screen(self, $UI.get_child(0))
 
 
 func shoot_bullet() -> void:

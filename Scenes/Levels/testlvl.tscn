@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://q82o1q7v1wn4"]
+[gd_scene load_steps=7 format=4 uid="uid://q82o1q7v1wn4"]
 
+[ext_resource type="Script" path="res://Scripts/LevelWinCondition.gd" id="1_k2hjs"]
 [ext_resource type="Texture2D" uid="uid://duieg3uxwsvic" path="res://Assets/temptileset.png" id="1_s420j"]
 [ext_resource type="Texture2D" uid="uid://bbm4yxqgcgetd" path="res://Assets/Aseprite/lvl1-map.png" id="2_lq46h"]
 [ext_resource type="PackedScene" uid="uid://dfg37rsvhj0i7" path="res://Scenes/PoliceSpawner.tscn" id="2_yxebs"]
@@ -18,6 +19,7 @@ physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_vsqd8")
 
 [node name="Testlvl" type="Node2D"]
+script = ExtResource("1_k2hjs")
 metadata/_edit_vertical_guides_ = [0.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [128.0, 1088.0]
 
