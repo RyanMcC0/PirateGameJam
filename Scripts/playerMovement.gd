@@ -30,7 +30,11 @@ var tinterShader = preload("res://Shaders/tinter.gdshader")
 var shaderTint = 0.3
 var shaderColor = Color.RED
 var curr_health = 2
-
+var arrow_target_exit = Vector2(2000,1000)
+var arrow_target = Vector2.ZERO
+var arrow_orbit_radius = 300
+var arrow_orbit_speed = 1.0
+var arrow_visible = false
 
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
@@ -39,7 +43,8 @@ signal melee_attack()
 @onready var upgrade_screen = get_tree().get_root().get_node("Node2D/UpgradeScreen")
 @onready var health_label = get_tree().get_root().get_node("Node2D/Player/UI/Ui/HealthUI/HBoxContainer/Label")
 @onready var loadingCircle = get_tree().get_root().get_node("Node2D/Player/UI/Ui/Mag/loadingBar") 
-
+@onready var arrow_sprite = get_tree().get_root().get_node("Node2D/Arrow")
+@onready var arrow_animation_player = get_tree().get_root().get_node("Node2D/Arrow/ArrowAnimation")
 # Load the bullet scene
 var Bullet = preload("res://Scenes/BulletProjPlayer.tscn")
 
@@ -52,6 +57,26 @@ func _ready() -> void:
 	$AnimatedSprite2D.material = ShaderMaterial.new()
 	$AnimatedSprite2D.material.shader = tinterShader
 	$AnimatedSprite2D.material.set_shader_parameter("color", shaderColor)
+	#reveal_arrow(arrow_target_exit) #Call this on level complete
+
+func reveal_arrow(target: Vector2) -> void:
+	arrow_target = target
+	arrow_visible = true
+	arrow_sprite.visible = true
+	arrow_animation_player.play("idle")
+
+func update_arrow(delta: float) -> void:
+	# Calculate the angle to the target
+	var direction = (arrow_target - global_position).normalized()
+	var angle_to_target = direction.angle()
+
+	# Calculate the orbit position relative to the player's global position
+	var orbit_position = Vector2(cos(angle_to_target), sin(angle_to_target)) * arrow_orbit_radius
+	arrow_sprite.global_position = global_position + orbit_position
+
+	# Calculate the direction to the target
+	arrow_sprite.rotation = direction.angle()+(PI/2)
+
 
 func _on_health_changed(new_health: int) -> void:
 	if health_label:
@@ -87,6 +112,10 @@ func _process(delta: float) -> void:
 		current_tint_frame += 1
 		if current_tint_frame >= tint_frames:
 			remove_red_tint()
+			
+	if arrow_visible:
+		update_arrow(delta)
+
 
 func start_reload() -> void:
 	is_reloading = true
@@ -112,7 +141,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("heal"):
 		heal(1)
 	if Input.is_action_just_pressed("show_upgrade"):
-		upgrade_screen.show_upgrade_screen(self)
+		upgrade_screen.show_upgrade_screen(self, $UI.get_child(0))
 
 
 func shoot_bullet() -> void:

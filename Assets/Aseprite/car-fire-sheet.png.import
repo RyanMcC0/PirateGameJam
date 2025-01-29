@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6oyxkmn7sdbe"
-path="res://.godot/imported/main-big-boy.png-48bc535b94eff543c33d92d23ec9fd73.ctex"
+uid="uid://dilns5senifho"
+path="res://.godot/imported/car-fire-sheet.png-d0c8d11c1fbfa700d2039bc4d07b6de6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Aseprite/main-big-boy.png"
-dest_files=["res://.godot/imported/main-big-boy.png-48bc535b94eff543c33d92d23ec9fd73.ctex"]
+source_file="res://Assets/Aseprite/car-fire-sheet.png"
+dest_files=["res://.godot/imported/car-fire-sheet.png-d0c8d11c1fbfa700d2039bc4d07b6de6.ctex"]
 
 [params]
 

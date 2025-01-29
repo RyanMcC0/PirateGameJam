@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwk4cuyv35eeh"]
+[gd_scene load_steps=2 format=3 uid="uid://d2xvudm1veb0w"]
 
 [ext_resource type="Script" path="res://Scripts/upgrade_screen.gd" id="1_ex30s"]
 

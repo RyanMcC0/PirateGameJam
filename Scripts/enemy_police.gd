@@ -34,7 +34,7 @@ var bullet_offsets = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player = get_parent().get_node("Player")
+	player = get_tree().get_root().get_node("Node2D/Player") 
 	ray_caster = $RayCast2D
 	ray_caster.enabled = true
 	lock_rotation = true

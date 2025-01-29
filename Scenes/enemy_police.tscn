@@ -377,7 +377,7 @@ animations = [{
 [node name="EnemyPolice" type="RigidBody2D" groups=["enemies"]]
 position = Vector2(247, 124)
 collision_layer = 138
-collision_mask = 138
+collision_mask = 64
 contact_monitor = true
 max_contacts_reported = 100
 script = ExtResource("1_3k3rl")
