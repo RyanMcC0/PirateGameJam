@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbm4yxqgcgetd"
-path="res://.godot/imported/lvl1-map.png-b5a87ae95b5ca3fa41d1b239f25858e3.ctex"
+uid="uid://bs5qdte3jhcjg"
+path="res://.godot/imported/direction_arrow.png-a89c986de776e1e1b5dcba8c03fe9d21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Aseprite/lvl1-map.png"
-dest_files=["res://.godot/imported/lvl1-map.png-b5a87ae95b5ca3fa41d1b239f25858e3.ctex"]
+source_file="res://Assets/Aseprite/direction_arrow.png"
+dest_files=["res://.godot/imported/direction_arrow.png-a89c986de776e1e1b5dcba8c03fe9d21.ctex"]
 
 [params]
 

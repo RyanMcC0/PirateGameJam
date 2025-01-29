@@ -17,7 +17,8 @@ var is_destroyed = false
 var respawnTime = 1.5
 var respawn_timer = 0.0
 var is_respawning = false
-
+var current_spawned = 0
+var spawned_objects = {}
 # Seconds for spawn delay
 var spawn_delay = 5.0
 
@@ -25,7 +26,7 @@ var spawn_delay = 5.0
 var spawn_check_timer = 0.0
 
 # How far away from car the police should spawn
-var spawn_offset: Vector2 = Vector2(0,0)
+var spawn_offset: Vector2 = Vector2(-15,30)
 
 var health_max = 5
 
@@ -81,10 +82,12 @@ func update_respawn_animation() -> void:
 		respawn_timer = 0
 
 func spawn_enemy() -> void:
-	start_respawn()
-	var new_enemy = enemy_scene.instantiate()
-	new_enemy.position = self.position - spawn_offset
-	get_parent().add_child(new_enemy)
+	if(current_spawned < 3):
+		start_respawn()
+		var new_enemy = enemy_scene.instantiate()
+		new_enemy.position = self.position + spawn_offset
+		get_parent().add_child(new_enemy)
+		current_spawned += 1
 
 func _on_bullet_hit() -> void:
 	apply_red_tint()

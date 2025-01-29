@@ -1,12 +1,50 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8yqr6aut1u18"]
+[gd_scene load_steps=13 format=3 uid="uid://c8yqr6aut1u18"]
 
 [ext_resource type="PackedScene" uid="uid://q82o1q7v1wn4" path="res://Scenes/Levels/testlvl.tscn" id="2_o4y0h"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
+[ext_resource type="Texture2D" uid="uid://bs5qdte3jhcjg" path="res://Assets/Aseprite/direction_arrow.png" id="2_t32kg"]
 [ext_resource type="PackedScene" uid="uid://d3np345uj17bp" path="res://Scenes/UI.tscn" id="3_m4gfi"]
 [ext_resource type="PackedScene" uid="uid://c0562xedba2p3" path="res://Scenes/pause_menu.tscn" id="4_8prwd"]
 [ext_resource type="Script" path="res://Scripts/UIOpacity.gd" id="4_ggx8l"]
 [ext_resource type="Script" path="res://Scripts/CameraEffects.gd" id="4_vkpkt"]
 [ext_resource type="PackedScene" uid="uid://d2xvudm1veb0w" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
+
+[sub_resource type="Animation" id="Animation_jjdph"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tqvia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p2444"]
+_data = {
+"RESET": SubResource("Animation_tqvia"),
+"idle": SubResource("Animation_jjdph")
+}
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
 
@@ -31,6 +69,15 @@ limit_right = 3648
 limit_bottom = 1920
 editor_draw_limits = true
 script = ExtResource("4_vkpkt")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(1784, 1051)
+texture = ExtResource("2_t32kg")
+
+[node name="ArrowAnimation" type="AnimationPlayer" parent="Arrow"]
+libraries = {
+"": SubResource("AnimationLibrary_p2444")
+}
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMP3_cg6f7")
