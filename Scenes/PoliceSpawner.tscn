@@ -132,14 +132,13 @@ animations = [{
 }]
 
 [node name="PoliceSpawner" type="RigidBody2D"]
-collision_layer = 72
+collision_layer = 264
 collision_mask = 72
 script = ExtResource("1_85g4n")
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-scale = Vector2(2, 2)
+scale = Vector2(1.59773, 1.59773)
 polygon = PackedVector2Array(126, 48, 99, 49, 91, 61, 69, 61, 57, 52, -59, 52, -69, 63, -85, 63, -95, 53, -127, 53, -127, 19, -114, 19, -80, 10, -56, 8, -28, -11, -4, -14, -2, -20, 30, -20, 30, -14, 56, -11, 96, 6, 118, 8, 126, 26, 130, 39)
 
 [node name="Car" type="AnimatedSprite2D" parent="."]

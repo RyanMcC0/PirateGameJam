@@ -30,7 +30,7 @@ var tinterShader = preload("res://Shaders/tinter.gdshader")
 var shaderTint = 0.3
 var shaderColor = Color.RED
 var curr_health = 2
-var arrow_target_exit = Vector2(2000,1000)
+var arrow_target_exit = Vector2(3750,600)
 var arrow_target = Vector2.ZERO
 var arrow_orbit_radius = 300
 var arrow_orbit_speed = 1.0
@@ -58,6 +58,9 @@ func _ready() -> void:
 	$AnimatedSprite2D.material.shader = tinterShader
 	$AnimatedSprite2D.material.set_shader_parameter("color", shaderColor)
 	#reveal_arrow(arrow_target_exit) #Call this on level complete
+
+func activate_arrow() -> void:
+	reveal_arrow(arrow_target_exit)
 
 func reveal_arrow(target: Vector2) -> void:
 	arrow_target = target

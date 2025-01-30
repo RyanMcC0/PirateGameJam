@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8yqr6aut1u18"]
+[gd_scene load_steps=18 format=3 uid="uid://c8yqr6aut1u18"]
 
+[ext_resource type="Script" path="res://Scenes/rootScript.gd" id="1_t7dvi"]
 [ext_resource type="PackedScene" uid="uid://q82o1q7v1wn4" path="res://Scenes/Levels/testlvl.tscn" id="2_o4y0h"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
 [ext_resource type="Texture2D" uid="uid://bs5qdte3jhcjg" path="res://Assets/Aseprite/direction_arrow.png" id="2_t32kg"]
@@ -48,14 +49,60 @@ _data = {
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
 
-[node name="Node2D" type="Node2D"]
-metadata/_edit_vertical_guides_ = [64.0, 3648.0]
-metadata/_edit_horizontal_guides_ = [192.0, 1920.0]
+[sub_resource type="Animation" id="Animation_d5k1x"]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0177324, 0.0177324, 0.0177324, 1), Color(0.360784, 0.360784, 0.360784, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pblix"]
+resource_name = "fadeIn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.203922, 0.203922, 0.203922, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k8iuy"]
+resource_name = "fadeOut"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8030l"]
+_data = {
+"RESET": SubResource("Animation_d5k1x"),
+"fadeIn": SubResource("Animation_pblix"),
+"fadeOut": SubResource("Animation_k8iuy")
+}
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("upgradeScreen", "player", "UI", "fadeInAnim")]
+script = ExtResource("1_t7dvi")
+upgradeScreen = NodePath("UpgradeScreen")
+player = NodePath("Player")
+UI = NodePath("Player/UI/Ui")
+fadeInAnim = NodePath("FadeIn")
+metadata/_edit_vertical_guides_ = [64.0, 3753.0]
+metadata/_edit_horizontal_guides_ = [598.0, 1920.0]
 
 [node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
 
 [node name="Player" parent="." instance=ExtResource("2_q4g8i")]
-position = Vector2(168, 610)
+position = Vector2(138, 613)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 script = ExtResource("4_ggx8l")
@@ -69,6 +116,16 @@ limit_right = 3648
 limit_bottom = 1920
 editor_draw_limits = true
 script = ExtResource("4_vkpkt")
+
+[node name="FadeIn" type="CanvasLayer" parent="Player/Camera2D"]
+
+[node name="Color" type="ColorRect" parent="Player/Camera2D/FadeIn"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0177324, 0.0177324, 0.0177324, 1)
 
 [node name="Arrow" type="Sprite2D" parent="."]
 visible = false
@@ -95,5 +152,11 @@ offset_right = 2.0
 offset_bottom = 2.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="FadeIn" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Player/Camera2D/FadeIn")
+libraries = {
+"": SubResource("AnimationLibrary_8030l")
+}
 
 [connection signal="ammo_count_changed" from="Player" to="Player/UI/Ui" method="_on_rigid_body_2d_ammo_count_changed"]

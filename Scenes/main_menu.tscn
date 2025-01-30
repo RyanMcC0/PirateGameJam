@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://7la4kqnv0aym"]
+[gd_scene load_steps=4 format=3 uid="uid://7la4kqnv0aym"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="2_4y2bl"]
+[ext_resource type="Texture2D" uid="uid://cpal2avbdly6" path="res://Assets/Aseprite/main_menu_logo.png" id="2_wt4l7"]
 [ext_resource type="Texture2D" uid="uid://beongebhi862c" path="res://Assets/Mock Title.png" id="3_ts6nn"]
 
 [node name="Main Menu" type="Control"]
@@ -12,6 +13,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_4y2bl")
 
+[node name="MainMenuLogo" type="Sprite2D" parent="."]
+position = Vector2(947, 386)
+scale = Vector2(0.29834, 0.29834)
+texture = ExtResource("2_wt4l7")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -19,10 +25,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -147.5
-offset_top = -50.5
-offset_right = 147.5
-offset_bottom = 50.5
+offset_left = -147.0
+offset_top = 244.0
+offset_right = 148.0
+offset_bottom = 345.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -44,10 +50,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -512.0
-offset_top = 150.0
-offset_right = 512.0
-offset_bottom = 411.0
+offset_left = -505.0
+offset_top = 217.0
+offset_right = 519.0
+offset_bottom = 478.0
 grow_horizontal = 2
 texture = ExtResource("3_ts6nn")
 
