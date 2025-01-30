@@ -26,7 +26,7 @@ var spawn_delay = 5.0
 var spawn_check_timer = 0.0
 
 # How far away from car the police should spawn
-var spawn_offset: Vector2 = Vector2(-15,30)
+var spawn_offset: Vector2 = Vector2(-15,300)
 
 var health_max = 5
 
@@ -86,6 +86,7 @@ func spawn_enemy() -> void:
 		start_respawn()
 		var new_enemy = enemy_scene.instantiate()
 		new_enemy.position = self.position + spawn_offset
+		new_enemy.name = "EnemyPolice"
 		get_parent().add_child(new_enemy)
 		current_spawned += 1
 

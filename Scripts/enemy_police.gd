@@ -12,7 +12,7 @@ var safe_distance = 100
 var accel = 5
 var player_location
 var bullet_speed = 500
-var bullet_offset = Vector2(80,-30)
+var bullet_offset = Vector2(80, -30)
 var impact_strength = 800
 var shot_timer = 0.0
 var fire_rate = 2
@@ -26,15 +26,15 @@ var shaderColor = Color.RED
 var curr_health = 2
 
 var bullet_offsets = {
-	0: Vector2(0, 30),  # South
-	1: Vector2(88, 8),   # East
-	2: Vector2(0, -100),   # North
-	3: Vector2(-88, 8)   # West
+	0: Vector2(0, 30), # South
+	1: Vector2(88, 8), # East
+	2: Vector2(0, -100), # North
+	3: Vector2(-88, 8) # West
 }
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player = get_tree().get_root().get_node("Node2D/Player") 
+	player = get_tree().get_root().get_node("Node2D/Player")
 	ray_caster = $RayCast2D
 	ray_caster.enabled = true
 	lock_rotation = true
@@ -72,22 +72,22 @@ func move(delta) -> void:
 	#if enemy is within safe distance and they have line of sight they should stop and shoot
 	#otherwise they should move toward the player
 	#if they get too close they should have a delay and then run away
-	var distance_lower_bound = shooting_distance - safe_distance 
+	var distance_lower_bound = shooting_distance - safe_distance
 	var distance_upper_bound = shooting_distance + safe_distance
 	
 	#maybe if they do not have line of sight we can reposition them
 	if distance >= distance_lower_bound and distance <= distance_upper_bound:
-		linear_velocity = Vector2(0,0)
+		linear_velocity = Vector2(0, 0)
 		$Legs.stop
 		$Legs.frame = 0
-		if(shot_timer >= fire_rate):
+		if (shot_timer >= fire_rate):
 			attack(direction)
 	elif distance < distance_lower_bound:
 		retreat(direction)
 		if not moving:
 			$Legs.play()
 		switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
-		if(shot_timer >= fire_rate):
+		if (shot_timer >= fire_rate):
 			attack(direction)
 			
 	elif distance > distance_upper_bound:
@@ -110,29 +110,62 @@ func attack(direction) -> void:
 	var bullet_global_position = global_position + (transform.basis_xform(offset))
 	bullet_instance.position = bullet_global_position
 
-	get_parent().add_child(bullet_instance)
+	#get_parent().add_child(bullet_instance)
 	bullet_instance.linear_velocity = bullet_speed * direction
 
 	play_anim_shoot()
 	shot_timer = 0.0
 
 func retreat(direction) -> void:
-	linear_velocity = linear_velocity.move_toward(-direction*movement_speed, accel)
+	linear_velocity = linear_velocity.move_toward(-direction * movement_speed, accel)
 
 func pursue(direction) -> void:
-		linear_velocity = linear_velocity.move_toward(direction*movement_speed, accel)
+	if (is_line_of_sight()):
+		var avoidance_direction = direction.rotated(PI / 4)
+		linear_velocity = avoidance_direction * movement_speed
+	else:
+		linear_velocity = linear_velocity.move_toward(direction * movement_speed, accel)
 
 
 # emit ray from enemy to player along vector path
 # if collision shape is found in path then no line of sight...
 func is_line_of_sight() -> bool:
-	ray_caster.target_position = player_location
-	var collided_with = ray_caster.get_collider()
-	if collided_with == player:
-		print("player found")
+	var space_state = get_world_2d().get_direct_space_state()
+	var collision_polygon = $CollisionPolygon2D
+	var shape = ConvexPolygonShape2D.new()
+	shape.points = collision_polygon.polygon
+
+# Calculate direction and distance to player
+	var direction = (player_location - global_position).normalized()
+	var distance = global_position.distance_to(player_location)
+
+# Check multiple points along path
+	var num_checks = 5
+	var step = distance / num_checks
+
+	var excludes_array = []
+	excludes_array.append(self.get_rid())
+	excludes_array.append(player.get_rid())
+
+	var should_move = false
+	for i in range(num_checks):
+		var check_position = global_position + direction * (step * i)
+		var params = PhysicsShapeQueryParameters2D.new()
+		params.shape = shape
+		params.transform = Transform2D(direction.angle(), check_position)
+		params.exclude = excludes_array
+
+		var result = space_state.intersect_shape(params)
+		if not result.is_empty():
+			for dict in result:
+				var collider = dict.collider
+				if (collider.collision_layer & self.collision_mask) == 0 and (collider.collision_mask & self.collision_layer) == 0:
+					pass
+				else:
+					should_move = true
+	if should_move:
 		return true
 	else:
-		print("player not found")
 		return false
 
 #Returns value relating to characters facing direction # N-0 E-1 S-2 W-3 (Increases CW from north)
@@ -155,16 +188,16 @@ func convertToCardinal(velocity: Vector2) -> int:
 
 func switch_anim(facing: int) -> void:
 	match facing:
-		0: 
+		0:
 			$TorsoSprite.animation = "ShootingNorth"
 			$Legs.animation = "walkNS"
-		1: 
+		1:
 			$TorsoSprite.animation = "ShootEast"
 			$Legs.animation = "walkEW"
-		2: 
+		2:
 			$TorsoSprite.animation = "ShootSouth"
 			$Legs.animation = "walkNS"
-		3: 
+		3:
 			$TorsoSprite.animation = "ShootWest"
 			$Legs.animation = "walkEW"
 
@@ -174,7 +207,7 @@ func play_anim_shoot() -> void:
 func _on_melee_hit() -> void:
 	var direction = (player_location - self.position).normalized()
 	shot_timer = 0.0 # Disable shooting after hit
-	apply_central_impulse(-direction*impact_strength)
+	apply_central_impulse(-direction * impact_strength)
 	curr_health -= 1
 	if (curr_health <= 0):
 		queue_free()
