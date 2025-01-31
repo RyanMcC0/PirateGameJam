@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmq2wblu6rm0c"]
+[gd_scene load_steps=3 format=3 uid="uid://bmq2wblu6rm0c"]
 
 [ext_resource type="Script" path="res://Scripts/options_menu.gd" id="1_6xeqs"]
+[ext_resource type="AudioStream" uid="uid://6mskie2g3clb" path="res://Assets/Aseprite/Pixel Blast.mp3" id="2_pt15r"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -88,6 +89,8 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+max_value = 1.0
+value = 1.0
 
 [node name="Music Volume" type="Label" parent="."]
 layout_mode = 1
@@ -122,6 +125,8 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+max_value = 1.0
+value = 1.0
 
 [node name="Game Volume" type="Label" parent="."]
 layout_mode = 1
@@ -137,6 +142,11 @@ offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Game volume:"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pt15r")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="BackButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="value_changed" from="MusicVolumeSliderContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]

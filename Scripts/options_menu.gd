@@ -2,10 +2,17 @@ extends Control
 
 @onready var music_slider = $MusicVolumeSliderContainer/MusicVolumeSlider
 @onready var game_slider = $GameVolumeSliderContainer2/GameVolumeSlider
+@onready var Music = $Music
 
 func _ready():
 	music_slider.value = get_bus_volume("Music")
+	music_slider.min_value = 0.0001
+	music_slider.max_value = 1
+	music_slider.step = 0.0001
 	game_slider.value = get_bus_volume("SFX")
+	game_slider.min_value = 0.0001
+	game_slider.max_value = 1
+	game_slider.step = 0.0001
 	
 	music_slider.connect("value_changed", Callable(self, "_on_music_volume_changed"))
 	game_slider.connect("value_changed", Callable(self, "_on_game_volume_changed"))
@@ -19,7 +26,7 @@ func _on_music_volume_slider_value_changed(value: float) -> void:
 
 
 func _on_game_volume_slider_value_changed(value: float) -> void:
-	set_bus_volume("SFX", value)
+	set_bus_volume("MainSFX", value)
 
 
 func set_bus_volume(bus_name, value):

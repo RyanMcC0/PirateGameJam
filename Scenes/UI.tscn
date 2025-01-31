@@ -1,20 +1,13 @@
-[gd_scene load_steps=32 format=3 uid="uid://d3np345uj17bp"]
-
+[gd_scene load_steps=31 format=3 uid="uid://d3np345uj17bp"]
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
 [ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
 [ext_resource type="Texture2D" uid="uid://b42kekwatuq3f" path="res://Assets/Aseprite/loading.png" id="3_c8xae"]
 [ext_resource type="Script" path="res://Scripts/health_ui.gd" id="3_t6grl"]
 [ext_resource type="Texture2D" uid="uid://dx6kdj0ph28vo" path="res://Assets/Heart Sprite.png" id="4_bq1nb"]
-
+[ext_resource type="FontFile" uid="uid://cdgojpdrstidx" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="6_h1wxc"]
 [ext_resource type="Texture2D" uid="uid://dqd06nsh223g8" path="res://Assets/Aseprite/car-idle-sheet.png" id="6_hyesj"]
 [ext_resource type="Texture2D" uid="uid://dub7ssbwy05ma" path="res://Assets/Aseprite/Cop_enemy_shoot_south-Sheet.svg" id="7_htwgo"]
-
-[ext_resource type="FontFile" uid="uid://cdgojpdrstidx" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="6_h1wxc"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eua4s"]
-size = Vector2(1920, 192)
-
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwpdf"]
 atlas = ExtResource("2_ldcvm")

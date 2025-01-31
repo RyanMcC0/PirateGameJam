@@ -14,11 +14,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_4y2bl")
 
-[node name="MainMenuLogo" type="Sprite2D" parent="."]
-position = Vector2(947, 386)
-scale = Vector2(0.29834, 0.29834)
-texture = ExtResource("2_wt4l7")
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -72,6 +67,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StartGame2" type="Label" parent="."]
+layout_mode = 0
 offset_left = 857.0
 offset_top = 796.0
 offset_right = 1083.0
@@ -82,6 +78,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StartGame3" type="Label" parent="."]
+layout_mode = 0
 offset_left = 857.0
 offset_top = 935.0
 offset_right = 1083.0

@@ -165,10 +165,11 @@ func is_line_of_sight() -> bool:
 		if not result.is_empty():
 			for dict in result:
 				var collider = dict.collider
-				if (collider.collision_layer & self.collision_mask) == 0 and (collider.collision_mask & self.collision_layer) == 0:
-					pass
-				else:
-					should_move = true
+				if collider is not TileMapLayer:
+					if (collider.collision_layer & self.collision_mask) == 0 and (collider.collision_mask & self.collision_layer) == 0:
+						pass
+					else:
+						should_move = true
 	if should_move:
 		return true
 	else:

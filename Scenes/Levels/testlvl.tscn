@@ -40,8 +40,6 @@ offset_right = 3840.0
 offset_bottom = 2048.0
 texture = ExtResource("4_iq176")
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
-
 [node name="PoliceCarSpawn1" type="Node2D" parent="."]
 editor_description = "true"
 position = Vector2(3225, 477)

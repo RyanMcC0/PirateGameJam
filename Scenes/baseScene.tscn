@@ -1,4 +1,5 @@
 [gd_scene load_steps=17 format=3 uid="uid://c8yqr6aut1u18"]
+
 [ext_resource type="Script" path="res://Scenes/rootScript.gd" id="1_t7dvi"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
 [ext_resource type="Texture2D" uid="uid://bs5qdte3jhcjg" path="res://Assets/Aseprite/direction_arrow.png" id="2_t32kg"]
@@ -8,7 +9,6 @@
 [ext_resource type="Script" path="res://Scripts/CameraEffects.gd" id="4_vkpkt"]
 [ext_resource type="PackedScene" uid="uid://d2xvudm1veb0w" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
 [ext_resource type="AudioStream" uid="uid://6mskie2g3clb" path="res://Assets/Aseprite/Pixel Blast.mp3" id="10_32w21"]
-
 
 [sub_resource type="Animation" id="Animation_tqvia"]
 length = 0.001
@@ -148,7 +148,7 @@ libraries = {
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_32w21")
-volume_db = -11.243
+bus = &"Music"
 
 [node name="UpgradeScreen" parent="." instance=ExtResource("6_1fdpl")]
 visible = false
@@ -171,7 +171,7 @@ libraries = {
 
 [node name="PixelBlast" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_32w21")
-
+bus = &"Music"
 
 [connection signal="ammo_count_changed" from="Player" to="Player/UI/Ui" method="_on_rigid_body_2d_ammo_count_changed"]
 [connection signal="animation_finished" from="FadeIn" to="." method="_on_fade_in_animation_finished"]
