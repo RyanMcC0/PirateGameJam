@@ -9,7 +9,7 @@ func _ready():
 	music_slider.min_value = 0.0001
 	music_slider.max_value = 1
 	music_slider.step = 0.0001
-	game_slider.value = get_bus_volume("SFX")
+	game_slider.value = get_bus_volume("Main(SFX)")
 	game_slider.min_value = 0.0001
 	game_slider.max_value = 1
 	game_slider.step = 0.0001
@@ -26,7 +26,7 @@ func _on_music_volume_slider_value_changed(value: float) -> void:
 
 
 func _on_game_volume_slider_value_changed(value: float) -> void:
-	set_bus_volume("MainSFX", value)
+	set_bus_volume("Main(SFX)", value)
 
 
 func set_bus_volume(bus_name, value):

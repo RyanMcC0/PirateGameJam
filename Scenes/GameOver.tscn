@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://3u5lti23tk3k"]
+[gd_scene load_steps=3 format=3 uid="uid://3u5lti23tk3k"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_laohk"]
+[ext_resource type="AudioStream" uid="uid://yr0iewht3pq7" path="res://Assets/Audio/Sounds/zapsplat_multimedia_game_sound_punchy_break_smash_glass_or_jewel_001_111828.mp3" id="2_j61ie"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -60,6 +61,10 @@ text = "Restart?"
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit?"
+
+[node name="Die" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_j61ie")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

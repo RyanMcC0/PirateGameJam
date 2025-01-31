@@ -11,6 +11,7 @@ var levelScene = preload("res://Scenes/Levels/testlvl.tscn")
 @export var player: RigidBody2D
 @export var UI: Node2D
 @export var fadeInAnim: AnimationPlayer
+@export var AudioMaster: Node
 var levelObj
 
 # Called when the node enters the scene tree for the first time.
@@ -26,16 +27,18 @@ func level_clear_check() -> void:
 		levelClear = true
 		$Player.activate_arrow()
 		upgradeScreen.show_upgrade_screen(player, UI)
+		AudioMaster.get_child(1).play()
 
 func on_level_start() -> void:
 	self.move_child(self.get_child(-1),0)
 	levelObj = get_child(0)
 	$Player.current_health = $Player.max_health
+	UI.get_child(2)._update_health($Player.current_health)
 	fadeInAnim.play("fadeIn")
 	get_tree().paused = false
 	levelClear = false
 	levelChange = false
-	$Music.playing = true
+	AudioMaster.get_child(0).playing = true
 
 func on_level_end() -> void:
 	fadeInAnim.play("fadeOut")

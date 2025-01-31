@@ -44,11 +44,13 @@ func _on_upgrade1_pressed() -> void:
 	var effect = $HBoxContainer/Upgrade1Container/Upgrade1Card.get_meta("effect")
 	apply_upgrade(effect)
 	visible = false # upgrade screen invisible after selection
+	$Upgrade.play()
 
 func _on_upgrade2_pressed() -> void:
 	var effect = $HBoxContainer/Upgrade2Container/Upgrade2Card.get_meta("effect")
 	apply_upgrade(effect)
 	visible = false # upgrade screen invisible after selection
+	$Upgrade.play()
 
 func apply_upgrade(effect: String) -> void:
 	match effect:

@@ -127,6 +127,7 @@ func _process(delta: float) -> void:
 
 
 func start_reload() -> void:
+	$Reload.play()
 	is_reloading = true
 	reload_timer = reloadTime
 	loadingCircle.visible = true
@@ -165,6 +166,8 @@ func shoot_bullet() -> void:
 		if homing_enabled:
 			bullet_instance.homing_enabled = true
 			bullet_instance.target = get_nearest_enemy() # get the nearest enemy to the bullet	
+			
+		$GunShot.play()
 		get_parent().add_child(bullet_instance)
 		bullet_instance.linear_velocity = bullet_speed * bullet_direction
 		$AnimatedSprite2D.play("Shooting")

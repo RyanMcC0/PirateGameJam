@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8yqr6aut1u18"]
+[gd_scene load_steps=21 format=3 uid="uid://c8yqr6aut1u18"]
 
 [ext_resource type="Script" path="res://Scenes/rootScript.gd" id="1_t7dvi"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
@@ -8,7 +8,11 @@
 [ext_resource type="Script" path="res://Scripts/UIOpacity.gd" id="4_ggx8l"]
 [ext_resource type="Script" path="res://Scripts/CameraEffects.gd" id="4_vkpkt"]
 [ext_resource type="PackedScene" uid="uid://d2xvudm1veb0w" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
+[ext_resource type="AudioStream" uid="uid://csh7j742kc6fd" path="res://Assets/Audio/Sounds/gma_gun_pistol_shot_04_467.mp3" id="6_b01vb"]
+[ext_resource type="AudioStream" uid="uid://k0jiwwcur3np" path="res://Assets/Audio/Sounds/gma_gun_pistol_general_handling_04_442.mp3" id="7_kvuhh"]
 [ext_resource type="AudioStream" uid="uid://6mskie2g3clb" path="res://Assets/Aseprite/Pixel Blast.mp3" id="10_32w21"]
+[ext_resource type="AudioStream" uid="uid://dcqp8budr6wtt" path="res://Assets/Audio/Sounds/zapsplat_multimedia_game_sound_retro_musical_fun_finish_end_musical_tone_78365.mp3" id="11_mqyj2"]
+[ext_resource type="AudioStream" uid="uid://b5dcsih11mtyl" path="res://Assets/Audio/Sounds/zapsplat_multimedia_game_sound_hit_thud_success_win_finish_73561.mp3" id="13_ssr3b"]
 
 [sub_resource type="Animation" id="Animation_tqvia"]
 length = 0.001
@@ -101,12 +105,13 @@ _data = {
 "fadeOut": SubResource("Animation_k8iuy")
 }
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("upgradeScreen", "player", "UI", "fadeInAnim")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("upgradeScreen", "player", "UI", "fadeInAnim", "AudioMaster")]
 script = ExtResource("1_t7dvi")
 upgradeScreen = NodePath("UpgradeScreen")
 player = NodePath("Player")
 UI = NodePath("Player/UI/Ui")
 fadeInAnim = NodePath("FadeIn")
+AudioMaster = NodePath("Audio")
 metadata/_edit_vertical_guides_ = [64.0, 3753.0]
 metadata/_edit_horizontal_guides_ = [598.0, 1920.0]
 
@@ -136,6 +141,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0177324, 0.0177324, 0.0177324, 1)
 
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+current = true
+
+[node name="GunShot" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("6_b01vb")
+bus = &"Main(SFX)"
+
+[node name="Reload" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("7_kvuhh")
+bus = &"Main(SFX)"
+
 [node name="Arrow" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(1784, 1051)
@@ -146,12 +162,11 @@ libraries = {
 "": SubResource("AnimationLibrary_p2444")
 }
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_32w21")
-bus = &"Music"
-
 [node name="UpgradeScreen" parent="." instance=ExtResource("6_1fdpl")]
 visible = false
+
+[node name="Upgrade" type="AudioStreamPlayer" parent="UpgradeScreen"]
+stream = ExtResource("13_ssr3b")
 
 [node name="PauseMenu" type="CanvasLayer" parent="."]
 
@@ -169,9 +184,14 @@ libraries = {
 "": SubResource("AnimationLibrary_8030l")
 }
 
-[node name="PixelBlast" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="Node" parent="."]
+
+[node name="PixelBlast" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("10_32w21")
 bus = &"Music"
+
+[node name="LevelClear" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("11_mqyj2")
 
 [connection signal="ammo_count_changed" from="Player" to="Player/UI/Ui" method="_on_rigid_body_2d_ammo_count_changed"]
 [connection signal="animation_finished" from="FadeIn" to="." method="_on_fade_in_animation_finished"]

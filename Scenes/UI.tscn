@@ -146,14 +146,16 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_ss4rg"]
-font_size = 60
+font = ExtResource("6_h1wxc")
+font_size = 38
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tgmj1"]
 atlas = ExtResource("7_htwgo")
 region = Rect2(256, 0, 256, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ddifo"]
-font_size = 63
+font = ExtResource("6_h1wxc")
+font_size = 38
 
 [node name="Ui" type="Node2D" node_paths=PackedStringArray("policeLabel", "carLabel", "upgradesContainer")]
 script = ExtResource("1_4ffvu")

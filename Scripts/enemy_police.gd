@@ -93,8 +93,6 @@ func move(delta) -> void:
 		if not moving:
 			$Legs.play()
 		switch_anim(convertToCardinal(Vector2(-(self.position.x - player_location.x), self.position.y - player_location.y)))
-		if (shot_timer >= fire_rate):
-			attack(direction)
 			
 	elif distance > distance_upper_bound:
 		pursue(direction)
@@ -115,10 +113,9 @@ func attack(direction) -> void:
 	# Calculate the global position for the bullet using the offset
 	var bullet_global_position = global_position + (transform.basis_xform(offset))
 	bullet_instance.position = bullet_global_position
-
-	#get_parent().add_child(bullet_instance)
+	$Shoot.play()
+	get_parent().add_child(bullet_instance)
 	bullet_instance.linear_velocity = bullet_speed * direction
-
 	play_anim_shoot()
 	shot_timer = 0.0
 

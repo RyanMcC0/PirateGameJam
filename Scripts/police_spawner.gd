@@ -90,6 +90,7 @@ func update_respawn_animation() -> void:
 func spawn_enemy() -> void:
 	if(current_spawned < 2):
 		start_respawn()
+		$CarDoor.play()
 		var new_enemy = enemy_scene.instantiate()
 		new_enemy.parentObj = self
 		if !spawnTop:
@@ -126,6 +127,7 @@ func explode() -> void:
 	particle.emitting = true
 	get_tree().current_scene.add_child(particle)
 	parentNode.reduce_spawners()
+	$Explode.play()
 	
 func apply_red_tint() -> void:
 	$Car.material.set_shader_parameter("tint_amount", shaderTint)
