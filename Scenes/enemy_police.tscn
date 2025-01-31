@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bf3wgpr4wd7jt"]
+[gd_scene load_steps=58 format=3 uid="uid://bf3wgpr4wd7jt"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_police.gd" id="1_3k3rl"]
 [ext_resource type="Texture2D" uid="uid://dylydm0gm8jkp" path="res://Assets/Aseprite/Cop_enemy_shoot_ew-Sheet.svg" id="2_nrclf"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://wv0qotgrc2wy" path="res://Assets/Aseprite/Enemy_legs_walk_ns-Sheet.svg" id="5_4b30g"]
 [ext_resource type="Texture2D" uid="uid://wd3p7oqv4nwt" path="res://Assets/Aseprite/Enemy_legs_walk_ew-Sheet.svg" id="5_x8321"]
 [ext_resource type="AudioStream" uid="uid://csd7s4oaumix4" path="res://Assets/Audio/Sounds/gma_gun_pistol_shot_silenced_01_468.mp3" id="7_xsmms"]
+[ext_resource type="AudioStream" uid="uid://basy8y86ja77l" path="res://Assets/Audio/Sounds/zapsplat_human_male_voice_short_umph_grunt_hurt_pain_mouth_closed_003_71973.mp3" id="8_eec2h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v8dg6"]
 
@@ -412,3 +413,8 @@ texture = SubResource("GradientTexture2D_p1b7s")
 [node name="Shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_xsmms")
 bus = &"Main(SFX)"
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_eec2h")
+
+[connection signal="finished" from="Die" to="." method="_on_die_finished"]

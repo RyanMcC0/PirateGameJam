@@ -5,7 +5,7 @@ var playerEntrancePos = Vector2(138,613)
 var levelClear
 var levelChange = false
 var levelScene = preload("res://Scenes/Levels/testlvl.tscn")
-
+var time = 0
 
 @export var upgradeScreen: CanvasLayer
 @export var player: RigidBody2D
@@ -20,7 +20,10 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	time += delta
+
+func get_time() -> float:
+	return time;
 
 func level_clear_check() -> void:
 	if levelObj.spawnerCount == 0 && enemyCount == 0:
@@ -28,6 +31,7 @@ func level_clear_check() -> void:
 		$Player.activate_arrow()
 		upgradeScreen.show_upgrade_screen(player, UI)
 		AudioMaster.get_child(1).play()
+		
 
 func on_level_start() -> void:
 	self.move_child(self.get_child(-1),0)
@@ -39,6 +43,9 @@ func on_level_start() -> void:
 	levelClear = false
 	levelChange = false
 	AudioMaster.get_child(0).playing = true
+	if level == 6:
+		get_tree().change_scene_to_file("res://Scenes/GameWinScreen.tscn")
+		Globals.setFinalTime(int(time))
 
 func on_level_end() -> void:
 	fadeInAnim.play("fadeOut")
@@ -56,4 +63,3 @@ func _on_fade_in_animation_finished(anim_name: StringName) -> void:
 		get_tree().paused = true
 		levelObj.queue_free()
 		next_level()
-	

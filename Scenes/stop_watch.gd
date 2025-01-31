@@ -1,0 +1,17 @@
+extends Label
+
+var time = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	time += delta
+	text = "Timer: " + str(seconds_to_timer(int(time)))
+
+func seconds_to_timer(seconds: int) -> String:
+	var minutes = int(seconds / 60)
+	var OutSeconds = seconds % 60
+	return str(minutes).pad_zeros(2) + ":" + str(OutSeconds).pad_zeros(2)

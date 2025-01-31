@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d3np345uj17bp"]
+[gd_scene load_steps=33 format=3 uid="uid://d3np345uj17bp"]
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
 [ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cdgojpdrstidx" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="6_h1wxc"]
 [ext_resource type="Texture2D" uid="uid://dqd06nsh223g8" path="res://Assets/Aseprite/car-idle-sheet.png" id="6_hyesj"]
 [ext_resource type="Texture2D" uid="uid://dub7ssbwy05ma" path="res://Assets/Aseprite/Cop_enemy_shoot_south-Sheet.svg" id="7_htwgo"]
+[ext_resource type="Script" path="res://Scenes/stop_watch.gd" id="9_yjas7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwpdf"]
 atlas = ExtResource("2_ldcvm")
@@ -148,6 +149,8 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_ss4rg"]
 font = ExtResource("6_h1wxc")
 font_size = 38
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tgmj1"]
 atlas = ExtResource("7_htwgo")
@@ -156,6 +159,14 @@ region = Rect2(256, 0, 256, 0)
 [sub_resource type="LabelSettings" id="LabelSettings_ddifo"]
 font = ExtResource("6_h1wxc")
 font_size = 38
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qsgun"]
+font = ExtResource("6_h1wxc")
+font_size = 31
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Ui" type="Node2D" node_paths=PackedStringArray("policeLabel", "carLabel", "upgradesContainer")]
 script = ExtResource("1_4ffvu")
@@ -263,3 +274,12 @@ offset_top = 40.0
 offset_right = 252.0
 offset_bottom = 80.0
 scale = Vector2(0.501659, 0.501659)
+
+[node name="StopWatch" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 1031.0
+offset_right = 199.0
+offset_bottom = 1062.0
+text = "Timer:"
+label_settings = SubResource("LabelSettings_qsgun")
+script = ExtResource("9_yjas7")

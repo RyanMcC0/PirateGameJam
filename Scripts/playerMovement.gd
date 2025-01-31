@@ -144,14 +144,10 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and ammoCount > 0 and not is_reloading:
 			shoot_bullet()
 			add_force()
-	#handle damage action (press P key)
-	if Input.is_action_just_pressed("damage"):
-		take_damage(1)
-	#handle heal action (press H key)
-	if Input.is_action_just_pressed("heal"):
-		heal(1)
 	if Input.is_action_just_pressed("show_upgrade"):
-		upgrade_screen.show_upgrade_screen(self, $UI.get_child(0))
+		print("x")
+		get_parent().levelChange = true
+		get_parent()._on_fade_in_animation_finished("beens")
 
 
 func shoot_bullet() -> void:

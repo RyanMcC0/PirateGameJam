@@ -229,5 +229,9 @@ func remove_red_tint() -> void:
 	is_tinted = false
 	
 func die() -> void:
+	$Die.play()
+	self.visible = false
 	parentObj.reduce_spawn_count()
+
+func _on_die_finished() -> void:
 	queue_free()

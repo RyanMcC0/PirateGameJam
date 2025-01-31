@@ -3,8 +3,8 @@ extends CanvasLayer
 #list of all available upgrades
 var upgrades = [
 	{"name": "Increase Player Health", "effect": "increase_player_health", "description": "Increase max health by 1", "image": "res://Assets/Upgrade Cards/MORE HEALTH card.png"},
-	{"name": "Increase Recoil", "effect": "increase_recoil", "description": "Increase recoil by 20%, (Makes movement distance larger but rotational recoil higher)", "image": "res://Assets/Upgrade Cards/MORE RECOIL card.png"},
-	{"name": "Decrease Recoil", "effect": "decrease_recoil", "description": "Decrease recoil by 20%, (Makes movement distance shorter but rotational recoil lower)", "image": "res://Assets/Upgrade Cards/LESS RECOIL card.png"},
+	{"name": "Increase Recoil", "effect": "increase_recoil", "description": "Increase recoil by 20%, (Makes movement distance larger)", "image": "res://Assets/Upgrade Cards/MORE RECOIL card.png"},
+	{"name": "Decrease Recoil", "effect": "decrease_recoil", "description": "Decrease recoil by 20%, (Makes rotational recoil lower)", "image": "res://Assets/Upgrade Cards/LESS RECOIL card.png"},
 	{"name": "Increase Ammo Capacity", "effect": "increase_ammo_capacity", "description": "Increase max ammo by 1", "image": "res://Assets/Upgrade Cards/MORE AMMO card.png"},
 	{"name": "Reduce Reload Time", "effect": "reduce_reload_time", "description": "Reduce reload time by 25%", "image": "res://Assets/Upgrade Cards/FAST RELOAD card.png"},
 	{"name": "Homing Bullets", "effect": "enable_homing_bullets", "description": "Bullets adjust direction to home in on the nearest enemy.", "image": "res://Assets/Upgrade Cards/HOMING BULLET UPGRADE card.png"},
@@ -57,11 +57,9 @@ func apply_upgrade(effect: String) -> void:
 		"increase_recoil":
 			print("hit increc")
 			player.recoil_force_trans *= 1.2
-			player.recoil_force_rot *= 1.2
 			player.upgrades.append("increase_recoil")
 			ui.addToUpgrades("increase_recoil")
 		"decrease_recoil":
-			player.recoil_force_trans *= 0.8
 			player.recoil_force_rot *= 0.8
 			player.upgrades.append("decrease_recoil")
 			ui.addToUpgrades("decrease_recoil")
