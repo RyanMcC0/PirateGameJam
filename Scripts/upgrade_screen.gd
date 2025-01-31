@@ -2,13 +2,13 @@ extends CanvasLayer
 
 #list of all available upgrades
 var upgrades = [
-	{"name": "Increase Player Health", "effect": "increase_player_health", "description": "Increase max health by 1"},
-	{"name": "Increase Recoil", "effect": "increase_recoil", "description": "Increase recoil by 20%, (Makes movement distance larger but rotational recoil higher)"},
-	{"name": "Decrease Recoil", "effect": "decrease_recoil", "description": "Decrease recoil by 20%, (Makes movement distance shorter but rotational recoil lower)"},
-	{"name": "Increase Ammo Capacity", "effect": "increase_ammo_capacity", "description": "Increase max ammo by 1"},
-	{"name": "Reduce Reload Time", "effect": "reduce_reload_time", "description": "Reduce reload time by 25%"},
-	{"name": "Homing Bullets", "effect": "enable_homing_bullets", "description": "Bullets adjust direction to home in on the nearest enemy."},
-	{"name": "Increase Bullet Speed", "effect": "increase_bullet_speed", "description": "Increases bullet speed by 20%."},
+	{"name": "Increase Player Health", "effect": "increase_player_health", "description": "Increase max health by 1", "image": "res://Assets/Upgrade Cards/MORE HEALTH card.png"},
+	{"name": "Increase Recoil", "effect": "increase_recoil", "description": "Increase recoil by 20%, (Makes movement distance larger but rotational recoil higher)", "image": "res://Assets/Upgrade Cards/MORE RECOIL card.png"},
+	{"name": "Decrease Recoil", "effect": "decrease_recoil", "description": "Decrease recoil by 20%, (Makes movement distance shorter but rotational recoil lower)", "image": "res://Assets/Upgrade Cards/LESS RECOIL card.png"},
+	{"name": "Increase Ammo Capacity", "effect": "increase_ammo_capacity", "description": "Increase max ammo by 1", "image": "res://Assets/Upgrade Cards/MORE AMMO card.png"},
+	{"name": "Reduce Reload Time", "effect": "reduce_reload_time", "description": "Reduce reload time by 25%", "image": "res://Assets/Upgrade Cards/FAST RELOAD card.png"},
+	{"name": "Homing Bullets", "effect": "enable_homing_bullets", "description": "Bullets adjust direction to home in on the nearest enemy.", "image": "res://Assets/Upgrade Cards/HOMING BULLET UPGRADE card.png"},
+	{"name": "Increase Bullet Speed", "effect": "increase_bullet_speed", "description": "Increases bullet speed by 20%.", "image": "res://Assets/Upgrade Cards/FAST BULLETS upgrade card.png"},
 
 ]
 
@@ -17,8 +17,8 @@ var ui
 
 func _ready() -> void:
 	visible = false # hide upgrade screen initially
-	$HBoxContainer/Upgrade1Container/Upgrade1Button.connect("pressed", Callable(self, "_on_upgrade1_pressed"))
-	$HBoxContainer/Upgrade2Container/Upgrade2Button.connect("pressed", Callable(self, "_on_upgrade2_pressed"))
+	$HBoxContainer/Upgrade1Container/Upgrade1Card.connect("pressed", Callable(self, "_on_upgrade1_pressed"))
+	$HBoxContainer/Upgrade2Container/Upgrade2Card.connect("pressed", Callable(self, "_on_upgrade2_pressed"))
 
 func show_upgrade_screen(player_instance: Node, ui_instance: Node) -> void:
 	visible = true # show upgrade screen
@@ -28,23 +28,25 @@ func show_upgrade_screen(player_instance: Node, ui_instance: Node) -> void:
 	var chosen_upgrades = upgrades.slice(0,2) 
 
 	#assign upgrades to button 1
-	$HBoxContainer/Upgrade1Container/Upgrade1Button.text = chosen_upgrades[0]["name"] #assign button 1 
-	$HBoxContainer/Upgrade1Container/Upgrade1Button.set_meta("effect", chosen_upgrades[0]["effect"])
-	$HBoxContainer/Upgrade1Container/Upgrade1Description.text = chosen_upgrades[0]["description"]  # Update description
+	$Upgrade1Name.text = chosen_upgrades[0]["name"]
+	$HBoxContainer/Upgrade1Container/Upgrade1Card.texture_normal = load(chosen_upgrades[0]["image"])
+	$HBoxContainer/Upgrade1Container/Upgrade1Card.set_meta("effect", chosen_upgrades[0]["effect"])
+	$Upgrade1Description.text = chosen_upgrades[0]["description"]  # Update description
 
 	#assign upgrades to button 2
-	$HBoxContainer/Upgrade2Container/Upgrade2Button.text = chosen_upgrades[1]["name"] #assign button 1 
-	$HBoxContainer/Upgrade2Container/Upgrade2Button.set_meta("effect", chosen_upgrades[1]["effect"])
-	$HBoxContainer/Upgrade2Container/Upgrade2Description.text = chosen_upgrades[1]["description"]  # Update description
+	$Upgrade2Name.text = chosen_upgrades[1]["name"]
+	$HBoxContainer/Upgrade2Container/Upgrade2Card.texture_normal = load(chosen_upgrades[1]["image"])
+	$HBoxContainer/Upgrade2Container/Upgrade2Card.set_meta("effect", chosen_upgrades[1]["effect"])
+	$Upgrade2Description.text = chosen_upgrades[1]["description"]  # Update description
 
 
 func _on_upgrade1_pressed() -> void:
-	var effect = $HBoxContainer/Upgrade1Container/Upgrade1Button.get_meta("effect")
+	var effect = $HBoxContainer/Upgrade1Container/Upgrade1Card.get_meta("effect")
 	apply_upgrade(effect)
 	visible = false # upgrade screen invisible after selection
 
 func _on_upgrade2_pressed() -> void:
-	var effect = $HBoxContainer/Upgrade2Container/Upgrade2Button.get_meta("effect")
+	var effect = $HBoxContainer/Upgrade2Container/Upgrade2Card.get_meta("effect")
 	apply_upgrade(effect)
 	visible = false # upgrade screen invisible after selection
 

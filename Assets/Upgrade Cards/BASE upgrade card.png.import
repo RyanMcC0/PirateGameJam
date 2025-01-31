@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dylydm0gm8jkp"
-path="res://.godot/imported/Cop_enemy_shoot_ew-sheet.svg-8634759cd40141415206ad080a3285cf.ctex"
+uid="uid://c34g1xk5881d6"
+path="res://.godot/imported/BASE upgrade card.png-6dc6f4ad385d431a2d716ba94ef816da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Aseprite/Cop_enemy_shoot_ew-sheet.svg"
-dest_files=["res://.godot/imported/Cop_enemy_shoot_ew-sheet.svg-8634759cd40141415206ad080a3285cf.ctex"]
+source_file="res://Assets/Upgrade Cards/BASE upgrade card.png"
+dest_files=["res://.godot/imported/BASE upgrade card.png-6dc6f4ad385d431a2d716ba94ef816da.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

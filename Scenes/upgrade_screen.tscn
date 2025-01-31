@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2xvudm1veb0w"]
+[gd_scene load_steps=4 format=3 uid="uid://d2xvudm1veb0w"]
 
 [ext_resource type="Script" path="res://Scripts/upgrade_screen.gd" id="1_ex30s"]
+[ext_resource type="Texture2D" uid="uid://c34g1xk5881d6" path="res://Assets/Upgrade Cards/BASE upgrade card.png" id="2_4rs4c"]
+[ext_resource type="FontFile" uid="uid://cdgojpdrstidx" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="3_71hf0"]
 
 [node name="UpgradeScreen" type="CanvasLayer"]
 script = ExtResource("1_ex30s")
@@ -18,9 +20,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -356.5
-offset_top = 125.0
+offset_top = 100.0
 offset_right = 356.5
-offset_bottom = 228.0
+offset_bottom = 203.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
@@ -34,40 +36,79 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -356.5
-offset_top = -165.0
+offset_top = -263.5
 offset_right = 356.5
-offset_bottom = -125.0
+offset_bottom = 263.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 
 [node name="Upgrade1Container" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Upgrade1Button" type="Button" parent="HBoxContainer/Upgrade1Container"]
+[node name="Upgrade1Card" type="TextureButton" parent="HBoxContainer/Upgrade1Container"]
 layout_mode = 2
-size_flags_horizontal = 2
-text = "Upgrade 1 "
-
-[node name="Upgrade1Description" type="Label" parent="HBoxContainer/Upgrade1Container"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 3
-text = "Description 1
-"
+texture_normal = ExtResource("2_4rs4c")
+stretch_mode = 4
 
 [node name="Upgrade2Container" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 alignment = 1
 
-[node name="Upgrade2Button" type="Button" parent="HBoxContainer/Upgrade2Container"]
+[node name="Upgrade2Card" type="TextureButton" parent="HBoxContainer/Upgrade2Container"]
 layout_mode = 2
-size_flags_horizontal = 10
-text = "Upgrade 2 "
+texture_normal = ExtResource("2_4rs4c")
+stretch_mode = 4
 
-[node name="Upgrade2Description" type="Label" parent="HBoxContainer/Upgrade2Container"]
-layout_mode = 2
+[node name="Upgrade2Description" type="Label" parent="."]
+offset_left = 1052.0
+offset_top = 678.0
+offset_right = 1282.0
+offset_bottom = 743.0
 size_flags_horizontal = 8
 size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("3_71hf0")
+theme_override_font_sizes/font_size = 10
 text = "Description 2"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Upgrade1Description" type="Label" parent="."]
+offset_left = 639.0
+offset_top = 678.0
+offset_right = 869.0
+offset_bottom = 743.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_71hf0")
+theme_override_font_sizes/font_size = 10
+text = "Description 1
+"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Upgrade1Name" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.021
+anchor_bottom = 0.021
+offset_left = 639.0
+offset_top = 333.0
+offset_right = 828.68
+offset_bottom = 347.32
+theme_override_fonts/font = ExtResource("3_71hf0")
+theme_override_font_sizes/font_size = 10
+text = "Upgrade Name 1"
+horizontal_alignment = 1
+
+[node name="Upgrade2Name" type="Label" parent="."]
+offset_left = 1052.0
+offset_top = 333.0
+offset_right = 1282.0
+offset_bottom = 370.0
+theme_override_fonts/font = ExtResource("3_71hf0")
+theme_override_font_sizes/font_size = 10
+text = "Upgrade Name 2 "
+horizontal_alignment = 1
