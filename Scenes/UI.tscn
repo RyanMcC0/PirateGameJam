@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://d3np345uj17bp"]
+[gd_scene load_steps=22 format=3 uid="uid://d3np345uj17bp"]
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
 [ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
 [ext_resource type="Texture2D" uid="uid://b42kekwatuq3f" path="res://Assets/Aseprite/loading.png" id="3_c8xae"]
 [ext_resource type="Script" path="res://Scripts/health_ui.gd" id="3_t6grl"]
 [ext_resource type="Texture2D" uid="uid://dx6kdj0ph28vo" path="res://Assets/Heart Sprite.png" id="4_bq1nb"]
+[ext_resource type="FontFile" uid="uid://cdgojpdrstidx" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="6_h1wxc"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eua4s"]
 size = Vector2(1920, 192)
@@ -156,5 +157,6 @@ texture = ExtResource("4_bq1nb")
 layout_mode = 2
 theme_override_constants/outline_size = 9
 theme_override_constants/shadow_outline_size = 17
+theme_override_fonts/font = ExtResource("6_h1wxc")
 theme_override_font_sizes/font_size = 90
 text = "x3"
