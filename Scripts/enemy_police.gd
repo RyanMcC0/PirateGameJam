@@ -4,6 +4,7 @@ extends EnemyBase
 var player: Node2D
 var ray_caster: RayCast2D
 var Bullet = preload("res://Scenes/BulletProjEnemy.tscn")
+var parentObj: Node2D
 
 #Global variables
 var shooting_distance = 400
@@ -24,6 +25,7 @@ var tinterShader = preload("res://Shaders/tinter.gdshader")
 var shaderTint = 0.3
 var shaderColor = Color.RED
 var curr_health = 2
+var visibleDist = 2000.0
 
 var bullet_offsets = {
 	0: Vector2(0, 30), # South
@@ -50,7 +52,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	player_location = player.position
-	move(delta)
+	if(self.position.distance_to(player_location) < visibleDist):
+		move(delta)
+	else:
+		$Legs.stop
+		$Legs.frame = 0
 	if is_tinted:
 		current_tint_frame += 1
 		if current_tint_frame >= tint_frames:
@@ -59,8 +65,8 @@ func _process(delta: float) -> void:
 func _on_bullet_hit() -> void:
 	apply_red_tint()
 	curr_health -= 1
-	if (curr_health <= 0):
-		queue_free()
+	if (curr_health == 0):
+		die()
 
 #take player location, get to a reasonable distance
 func move(delta) -> void:
@@ -210,7 +216,7 @@ func _on_melee_hit() -> void:
 	apply_central_impulse(-direction * impact_strength)
 	curr_health -= 1
 	if (curr_health <= 0):
-		queue_free()
+		die()
 	apply_red_tint()
 
 func apply_red_tint() -> void:
@@ -223,3 +229,7 @@ func remove_red_tint() -> void:
 	$Legs.material.set_shader_parameter("tint_amount", 0.0)
 	$TorsoSprite.material.set_shader_parameter("tint_amount", 0.0)
 	is_tinted = false
+	
+func die() -> void:
+	parentObj.reduce_spawn_count()
+	queue_free()

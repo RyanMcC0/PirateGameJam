@@ -2,12 +2,12 @@ extends RigidBody2D
 
 const friction = 0.05
 var recoil_force_trans = 1000
-var recoil_force_rot = -3000
+var recoil_force_rot = -2000
 var rotation_speed = 25000
 var target
 var impact_strength = 350
 var can_follow_cursor = true
-var follow_delay = 0.3  # Adjust the delay as needed
+var follow_delay = 0.15  # Adjust the delay as needed
 var follow_delay_timer = 0.0
 var bullet_speed = 1500
 var bullet_offset = Vector2(88, -25)
@@ -16,8 +16,8 @@ var ammoCount = maxAmmo
 var reloadTime = 1.75
 var is_reloading = false
 var reload_timer = 0.0
-var max_health = 3 #max health of the player
-var current_health = 3 #current health of the player
+var max_health = 5 #max health of the player
+var current_health = 5 #current health of the player
 var kills_since_last_heal = 0 # tracks number of kills
 var kills_for_heal = 3 # number of kills required for heal
 var homing_enabled: bool = false
@@ -30,11 +30,12 @@ var tinterShader = preload("res://Shaders/tinter.gdshader")
 var shaderTint = 0.3
 var shaderColor = Color.RED
 var curr_health = 2
-var arrow_target_exit = Vector2(2000,1000)
+var arrow_target_exit = Vector2(3750,600)
 var arrow_target = Vector2.ZERO
 var arrow_orbit_radius = 300
 var arrow_orbit_speed = 1.0
 var arrow_visible = false
+var upgrades: Array
 
 signal health_changed(new_health)
 signal ammo_count_changed(new_ammo_count)
@@ -58,12 +59,20 @@ func _ready() -> void:
 	$AnimatedSprite2D.material.shader = tinterShader
 	$AnimatedSprite2D.material.set_shader_parameter("color", shaderColor)
 	#reveal_arrow(arrow_target_exit) #Call this on level complete
+	print(upgrades)
+
+func activate_arrow() -> void:
+	reveal_arrow(arrow_target_exit)
 
 func reveal_arrow(target: Vector2) -> void:
 	arrow_target = target
 	arrow_visible = true
 	arrow_sprite.visible = true
 	arrow_animation_player.play("idle")
+
+func hide_arrow() -> void:
+	arrow_visible = false
+	arrow_sprite.visible = false
 
 func update_arrow(delta: float) -> void:
 	# Calculate the angle to the target
@@ -174,7 +183,7 @@ func add_force() -> void:
 	follow_delay_timer = follow_delay
 
 func apply_friction(delta: float) -> void:
-	if linear_velocity.length() < 30:
+	if linear_velocity.length() < 50:
 		linear_velocity = Vector2(0,0)
 	else:
 		linear_velocity = linear_velocity * pow(friction, delta)

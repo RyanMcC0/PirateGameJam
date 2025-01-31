@@ -1,14 +1,20 @@
-[gd_scene load_steps=22 format=3 uid="uid://d3np345uj17bp"]
+[gd_scene load_steps=32 format=3 uid="uid://d3np345uj17bp"]
+
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_4ffvu"]
 [ext_resource type="Texture2D" uid="uid://dmxp5od840e14" path="res://Assets/Aseprite/mag-Sheet-1.svg" id="2_ldcvm"]
 [ext_resource type="Texture2D" uid="uid://b42kekwatuq3f" path="res://Assets/Aseprite/loading.png" id="3_c8xae"]
 [ext_resource type="Script" path="res://Scripts/health_ui.gd" id="3_t6grl"]
 [ext_resource type="Texture2D" uid="uid://dx6kdj0ph28vo" path="res://Assets/Heart Sprite.png" id="4_bq1nb"]
+
+[ext_resource type="Texture2D" uid="uid://dqd06nsh223g8" path="res://Assets/Aseprite/car-idle-sheet.png" id="6_hyesj"]
+[ext_resource type="Texture2D" uid="uid://dub7ssbwy05ma" path="res://Assets/Aseprite/Cop_enemy_shoot_south-Sheet.svg" id="7_htwgo"]
+
 [ext_resource type="FontFile" uid="uid://cdgojpdrstidx" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="6_h1wxc"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eua4s"]
 size = Vector2(1920, 192)
+
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwpdf"]
 atlas = ExtResource("2_ldcvm")
@@ -101,14 +107,66 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Ui" type="Node2D"]
-script = ExtResource("1_4ffvu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7mix"]
+atlas = ExtResource("6_hyesj")
+region = Rect2(256, 0, 256, 128)
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("PlaceholderTexture2D_eua4s")
+[sub_resource type="Animation" id="Animation_yq8ma"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AtlasTexture_m7mix")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owxsn"]
+atlas = ExtResource("6_hyesj")
+region = Rect2(0, 0, 256, 0)
+
+[sub_resource type="Animation" id="Animation_233ui"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_m7mix"), SubResource("AtlasTexture_owxsn")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jhs8"]
+_data = {
+"RESET": SubResource("Animation_yq8ma"),
+"idle": SubResource("Animation_233ui")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ss4rg"]
+font_size = 60
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgmj1"]
+atlas = ExtResource("7_htwgo")
+region = Rect2(256, 0, 256, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ddifo"]
+font_size = 63
+
+[node name="Ui" type="Node2D" node_paths=PackedStringArray("policeLabel", "carLabel", "upgradesContainer")]
+script = ExtResource("1_4ffvu")
+policeLabel = NodePath("EnemyCounters/Police/Label")
+carLabel = NodePath("EnemyCounters/Car/Label")
+upgradesContainer = NodePath("Upgrades/Upgrades")
 
 [node name="AmmoCounter" type="Node2D" parent="."]
 position = Vector2(706, 103)
@@ -160,3 +218,53 @@ theme_override_constants/shadow_outline_size = 17
 theme_override_fonts/font = ExtResource("6_h1wxc")
 theme_override_font_sizes/font_size = 90
 text = "x3"
+
+[node name="EnemyCounters" type="CanvasLayer" parent="."]
+
+[node name="Car" type="BoxContainer" parent="EnemyCounters"]
+offset_left = 1744.0
+offset_top = 9.0
+offset_right = 2071.0
+offset_bottom = 137.0
+scale = Vector2(0.412315, 0.412315)
+
+[node name="car" type="TextureRect" parent="EnemyCounters/Car"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_m7mix")
+
+[node name="idle" type="AnimationPlayer" parent="EnemyCounters/Car/car"]
+deterministic = true
+libraries = {
+"": SubResource("AnimationLibrary_8jhs8")
+}
+autoplay = "idle"
+
+[node name="Label" type="Label" parent="EnemyCounters/Car"]
+layout_mode = 2
+text = ": 0x"
+label_settings = SubResource("LabelSettings_ss4rg")
+
+[node name="Police" type="BoxContainer" parent="EnemyCounters"]
+offset_left = 1742.0
+offset_top = 59.0
+offset_right = 2073.0
+offset_bottom = 315.0
+scale = Vector2(0.417594, 0.417594)
+
+[node name="police" type="TextureRect" parent="EnemyCounters/Police"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_tgmj1")
+
+[node name="Label" type="Label" parent="EnemyCounters/Police"]
+layout_mode = 2
+text = ": 0x"
+label_settings = SubResource("LabelSettings_ddifo")
+
+[node name="Upgrades" type="CanvasLayer" parent="."]
+
+[node name="Upgrades" type="HBoxContainer" parent="Upgrades"]
+offset_left = 212.0
+offset_top = 40.0
+offset_right = 252.0
+offset_bottom = 80.0
+scale = Vector2(0.501659, 0.501659)

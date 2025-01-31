@@ -10,16 +10,40 @@ var magBulletQueue: Array
 var ejectBulletQueue: Array
 var BulletUI = preload("res://Scenes/BulletUI.tscn")
 var BulletProp = preload("res://Scenes/BulletProp.tscn")
+var totalCars = 0
+var totalEnemies = 0
+var upgrades
+var player
 
+@export var policeLabel: Label
+@export var carLabel: Label
+@export var upgradesContainer: HBoxContainer
+
+var upgDecRec = "res://Assets/Upgrades/decr_recoil.png"
+var upgDecRel = "res://Assets/Upgrades/decr_reload.png"
+var upgHomBul = "res://Assets/Upgrades/homing_bullet.png"
+var upgIncSpe = "res://Assets/Upgrades/incr_bullet_speed.png"
+var upgIncAmm = "res://Assets/Upgrades/incr_ammo_count.png"
+var upgIncRec = "res://Assets/Upgrades/incr_recoil.png"
+var upgIncHea = "res://Assets/Upgrades/incr_max_health.png"
+
+var upgradeToImage = {
+	"increase_recoil": upgIncRec,
+	"decrease_recoil": upgDecRec,
+	"increase_ammo_capacity": upgIncAmm,
+	"reduce_reload_time": upgDecRel,
+	"increase_health": upgIncHea,
+	"homing": upgHomBul,
+	"increase_bullet_speed": upgIncSpe
+}
 
 func _ready() -> void:
 	await getBulletPos()
 	$Mag.frame = ammo_count
-	var player = get_parent().get_parent().get_parent().get_node("Player")
+	player = get_parent().get_parent().get_parent().get_node("Player")
 	maxAmmo = player.maxAmmo
 	ammo_count = maxAmmo
 	reload_inst_bullets()
-
 
 func getBulletPos() -> void: 
 	for pos in bulletOffsets:
@@ -81,4 +105,32 @@ func eject_bullet() -> void:
 
 func randomEject() -> Vector3:
 	return Vector3(randi_range(-100, 20), randi_range(-150, 0), randi_range(10000,50000 ))
+
+func increasePolice() -> void:
+	totalEnemies += 1
+	policeLabel.text = ": " + str(totalEnemies) + "x"
+
+func instCars(cars:int) -> void:
+	totalCars = cars
+	carLabel.text = ": " + str(cars) + "x"
+
+func decreasePolice() -> void:
+	totalEnemies -= 1
+	policeLabel.text = ": " + str(totalEnemies) + "x"
+
+func decreaseCars() -> void:
+	totalCars -= 1
+	carLabel.text = ": " + str(totalCars) + "x"
+
+	
+func addToUpgrades(upgrade: String) -> void:
+	print(upgrade)
+	var upgradeObj = TextureRect.new() 
+	var image = Image.load_from_file(upgradeToImage.get(upgrade))
+	var imageObj = ImageTexture.new()
+	imageObj.set_image(image) 
+	upgradeObj.texture = imageObj
+	print(upgradeObj)
+	upgradesContainer.add_child(upgradeObj)
+	
 	

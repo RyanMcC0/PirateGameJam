@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 # Get the enemy node
+var parentNode
 var enemy_scene = preload("res://Scenes/enemy_police.tscn")
 var explosionEffect=preload("res://Scenes/explosionParticles.tscn")
 var tint_frames = 50
@@ -18,7 +19,10 @@ var respawnTime = 1.5
 var respawn_timer = 0.0
 var is_respawning = false
 var current_spawned = 0
-var spawned_objects = {}
+var spawnTop = false
+
+@onready var UI: Node2D = get_tree().get_root().get_node("Node2D/Player/UI/Ui")
+
 # Seconds for spawn delay
 var spawn_delay = 5.0
 
@@ -26,10 +30,11 @@ var spawn_delay = 5.0
 var spawn_check_timer = 0.0
 
 # How far away from car the police should spawn
-var spawn_offset: Vector2 = Vector2(-15,300)
+var spawn_offset_bottom: Vector2 = Vector2(-15,50)
+var spawn_offset_top: Vector2 = Vector2(-15,-50)
+var health_max = 3
 
-var health_max = 5
-
+@onready var root = get_tree().get_root().get_node("Node2D")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	lock_rotation = true
@@ -68,6 +73,7 @@ func _physics_process(delta: float) -> void:
 		$Car.play("idle")
 
 func start_respawn() -> void:
+	UI.increasePolice()
 	is_respawning = true
 	respawn_timer = respawnTime
 	$Car.animation = "spawn_enemy"
@@ -82,15 +88,29 @@ func update_respawn_animation() -> void:
 		respawn_timer = 0
 
 func spawn_enemy() -> void:
-	if(current_spawned < 3):
+	if(current_spawned < 2):
 		start_respawn()
 		var new_enemy = enemy_scene.instantiate()
-		new_enemy.position = self.position + spawn_offset
-		new_enemy.name = "EnemyPolice"
+		new_enemy.parentObj = self
+		if !spawnTop:
+			new_enemy.position = self.position + spawn_offset_bottom
+			spawnTop = !spawnTop
+		else:
+			new_enemy.position = self.position + spawn_offset_top
+			spawnTop = !spawnTop
 		get_parent().add_child(new_enemy)
 		current_spawned += 1
+		root.enemyCount += 1
+
+func reduce_spawn_count() -> void:
+	current_spawned -= 1
+	root.enemyCount -= 1
+	UI.decreasePolice()
+	if current_spawned == 0:
+		root.level_clear_check()
 
 func _on_bullet_hit() -> void:
+	spawn_check_timer = 0.0
 	apply_red_tint()
 	health_max -= 1
 	if(health_max <= 0) and !is_destroyed:
@@ -105,7 +125,8 @@ func explode() -> void:
 	particle.rotation = global_rotation
 	particle.emitting = true
 	get_tree().current_scene.add_child(particle)
-
+	parentNode.reduce_spawners()
+	
 func apply_red_tint() -> void:
 	$Car.material.set_shader_parameter("tint_amount", shaderTint)
 	is_tinted = true
