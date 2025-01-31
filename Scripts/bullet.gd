@@ -39,7 +39,7 @@ func _on_body_entered(collided: Node2D) -> void:
 		if collided.has_method("take_damage"):
 			collided.take_damage(1)
 		queue_free()
-	elif collided.name == "PoliceSpawner":
+	elif collided.editor_description == "police":
 		if collided.has_method("_on_bullet_hit"):
 			collided._on_bullet_hit()
 		queue_free()

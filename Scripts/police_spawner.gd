@@ -21,6 +21,8 @@ var is_respawning = false
 var current_spawned = 0
 var spawnTop = false
 
+@onready var UI: Node2D = get_tree().get_root().get_node("Node2D/Player/UI/Ui")
+
 # Seconds for spawn delay
 var spawn_delay = 5.0
 
@@ -71,6 +73,7 @@ func _physics_process(delta: float) -> void:
 		$Car.play("idle")
 
 func start_respawn() -> void:
+	UI.increasePolice()
 	is_respawning = true
 	respawn_timer = respawnTime
 	$Car.animation = "spawn_enemy"
@@ -85,7 +88,7 @@ func update_respawn_animation() -> void:
 		respawn_timer = 0
 
 func spawn_enemy() -> void:
-	if(current_spawned < 3):
+	if(current_spawned < 2):
 		start_respawn()
 		var new_enemy = enemy_scene.instantiate()
 		new_enemy.parentObj = self
@@ -102,10 +105,12 @@ func spawn_enemy() -> void:
 func reduce_spawn_count() -> void:
 	current_spawned -= 1
 	root.enemyCount -= 1
+	UI.decreasePolice()
 	if current_spawned == 0:
 		root.level_clear_check()
 
 func _on_bullet_hit() -> void:
+	spawn_check_timer = 0.0
 	apply_red_tint()
 	health_max -= 1
 	if(health_max <= 0) and !is_destroyed:

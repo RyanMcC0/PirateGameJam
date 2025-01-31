@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8yqr6aut1u18"]
+[gd_scene load_steps=17 format=3 uid="uid://c8yqr6aut1u18"]
 
 [ext_resource type="Script" path="res://Scenes/rootScript.gd" id="1_t7dvi"]
-[ext_resource type="PackedScene" uid="uid://q82o1q7v1wn4" path="res://Scenes/Levels/testlvl.tscn" id="2_o4y0h"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
 [ext_resource type="Texture2D" uid="uid://bs5qdte3jhcjg" path="res://Assets/Aseprite/direction_arrow.png" id="2_t32kg"]
 [ext_resource type="PackedScene" uid="uid://d3np345uj17bp" path="res://Scenes/UI.tscn" id="3_m4gfi"]
@@ -9,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/UIOpacity.gd" id="4_ggx8l"]
 [ext_resource type="Script" path="res://Scripts/CameraEffects.gd" id="4_vkpkt"]
 [ext_resource type="PackedScene" uid="uid://d2xvudm1veb0w" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
+[ext_resource type="AudioStream" uid="uid://6mskie2g3clb" path="res://Assets/Aseprite/Pixel Blast.mp3" id="10_32w21"]
 
 [sub_resource type="Animation" id="Animation_tqvia"]
 length = 0.001
@@ -47,8 +47,6 @@ _data = {
 "idle": SubResource("Animation_jjdph")
 }
 
-[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cg6f7"]
-
 [sub_resource type="Animation" id="Animation_d5k1x"]
 length = 2.0
 tracks/0/type = "value"
@@ -82,6 +80,19 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_k8iuy"]
 resource_name = "fadeOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0196078, 0.0196078, 0.0196078, 0), Color(0.0177324, 0.0177324, 0.0177324, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8030l"]
 _data = {
@@ -98,8 +109,6 @@ UI = NodePath("Player/UI/Ui")
 fadeInAnim = NodePath("FadeIn")
 metadata/_edit_vertical_guides_ = [64.0, 3753.0]
 metadata/_edit_horizontal_guides_ = [598.0, 1920.0]
-
-[node name="Testlvl" parent="." instance=ExtResource("2_o4y0h")]
 
 [node name="Player" parent="." instance=ExtResource("2_q4g8i")]
 position = Vector2(138, 613)
@@ -138,7 +147,8 @@ libraries = {
 }
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamMP3_cg6f7")
+stream = ExtResource("10_32w21")
+volume_db = -11.243
 
 [node name="UpgradeScreen" parent="." instance=ExtResource("6_1fdpl")]
 visible = false
@@ -159,4 +169,8 @@ libraries = {
 "": SubResource("AnimationLibrary_8030l")
 }
 
+[node name="PixelBlast" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_32w21")
+
 [connection signal="ammo_count_changed" from="Player" to="Player/UI/Ui" method="_on_rigid_body_2d_ammo_count_changed"]
+[connection signal="animation_finished" from="FadeIn" to="." method="_on_fade_in_animation_finished"]

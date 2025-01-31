@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 func _on_bullet_hit() -> void:
 	apply_red_tint()
 	curr_health -= 1
-	if (curr_health <= 0):
+	if (curr_health == 0):
 		die()
 
 #take player location, get to a reasonable distance
@@ -116,7 +116,7 @@ func attack(direction) -> void:
 	var bullet_global_position = global_position + (transform.basis_xform(offset))
 	bullet_instance.position = bullet_global_position
 
-	#get_parent().add_child(bullet_instance)
+	get_parent().add_child(bullet_instance)
 	bullet_instance.linear_velocity = bullet_speed * direction
 
 	play_anim_shoot()
