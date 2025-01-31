@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8yqr6aut1u18"]
+[gd_scene load_steps=14 format=3 uid="uid://c8yqr6aut1u18"]
 
 [ext_resource type="PackedScene" uid="uid://q82o1q7v1wn4" path="res://Scenes/Levels/testlvl.tscn" id="2_o4y0h"]
 [ext_resource type="PackedScene" uid="uid://cc4bktgpst7st" path="res://Scenes/Player.tscn" id="2_q4g8i"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/UIOpacity.gd" id="4_ggx8l"]
 [ext_resource type="Script" path="res://Scripts/CameraEffects.gd" id="4_vkpkt"]
 [ext_resource type="PackedScene" uid="uid://d2xvudm1veb0w" path="res://Scenes/upgrade_screen.tscn" id="6_1fdpl"]
+[ext_resource type="AudioStream" uid="uid://cnxv5lxmp71w8" path="res://Assets/Audio/Pixel Blast.mp3" id="9_3d6li"]
 
 [sub_resource type="Animation" id="Animation_tqvia"]
 length = 0.001
@@ -95,5 +96,10 @@ offset_right = 2.0
 offset_bottom = 2.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_3d6li")
+autoplay = true
+bus = &"Music"
 
 [connection signal="ammo_count_changed" from="Player" to="Player/UI/Ui" method="_on_rigid_body_2d_ammo_count_changed"]

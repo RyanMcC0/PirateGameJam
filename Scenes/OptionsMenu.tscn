@@ -70,4 +70,74 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 text = "< Back"
 
+[node name="MusicVolumeSliderContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -90.0
+offset_right = 178.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MusicVolumeSliderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Music Volume" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -113.0
+offset_right = -68.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Music volume:"
+
+[node name="GameVolumeSliderContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.5
+offset_top = -150.0
+offset_right = 179.5
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameVolumeSlider" type="HSlider" parent="GameVolumeSliderContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Game Volume" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -173.0
+offset_right = -68.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game volume:"
+
 [connection signal="pressed" from="BackButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="MusicVolumeSliderContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="GameVolumeSliderContainer2/GameVolumeSlider" to="." method="_on_game_volume_slider_value_changed"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://7la4kqnv0aym"]
+[gd_scene load_steps=5 format=3 uid="uid://7la4kqnv0aym"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="2_4y2bl"]
-[ext_resource type="Texture2D" uid="uid://beongebhi862c" path="res://Assets/Mock Title.png" id="3_ts6nn"]
+[ext_resource type="Texture2D" uid="uid://rh0wt6s4utnm" path="res://Assets/menu card.png" id="2_7nduo"]
+[ext_resource type="Texture2D" uid="uid://c7v2tw6a82x8q" path="res://Assets/brick with green pt 2.png" id="2_y0hi5"]
+[ext_resource type="FontFile" uid="uid://cdgojpdrstidx" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="4_yxgdo"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -19,39 +21,71 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -147.5
-offset_top = -50.5
-offset_right = 147.5
-offset_bottom = 50.5
+offset_left = -110.0
+offset_top = 110.0
+offset_right = 130.0
+offset_bottom = 523.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
+[node name="StartGameCard" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
-text = "Start"
+texture_normal = ExtResource("2_7nduo")
 
-[node name="ControlsButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsCard" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
-text = "Options"
-script = ExtResource("2_4y2bl")
+texture_normal = ExtResource("2_7nduo")
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitCard" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+texture_normal = ExtResource("2_7nduo")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -512.0
-offset_top = 150.0
-offset_right = 512.0
-offset_bottom = 411.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -440.0
+offset_right = 250.0
+offset_bottom = 60.0
 grow_horizontal = 2
-texture = ExtResource("3_ts6nn")
+grow_vertical = 2
+texture = ExtResource("2_y0hi5")
 
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ControlsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="StartGame" type="Label" parent="."]
+layout_mode = 2
+offset_left = 857.0
+offset_top = 657.0
+offset_right = 1083.0
+offset_bottom = 778.0
+theme_override_fonts/font = ExtResource("4_yxgdo")
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGame2" type="Label" parent="."]
+offset_left = 857.0
+offset_top = 796.0
+offset_right = 1083.0
+offset_bottom = 917.0
+theme_override_fonts/font = ExtResource("4_yxgdo")
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGame3" type="Label" parent="."]
+offset_left = 857.0
+offset_top = 935.0
+offset_right = 1083.0
+offset_bottom = 1056.0
+theme_override_fonts/font = ExtResource("4_yxgdo")
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/StartGameCard" to="." method="_on_start_game_card_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsCard" to="." method="_on_options_card_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitCard" to="." method="_on_quit_card_pressed"]
